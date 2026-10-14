@@ -1,0 +1,16 @@
+{
+  "version": "0.1",
+  "purpose": "Representative source access checks; does not establish full-period completeness",
+  "station_id": "100971",
+  "samples": [
+    {"id": "winter-2024", "start": "2024-01-01T00:00:00Z", "end": "2024-01-02T00:00:00Z", "timestep": 60},
+    {"id": "winter-2024-repeat", "start": "2024-01-01T00:00:00Z", "end": "2024-01-02T00:00:00Z", "timestep": 60},
+    {"id": "summer-2024", "start": "2024-07-01T00:00:00Z", "end": "2024-07-02T00:00:00Z", "timestep": 60},
+    {"id": "spring-local-day-2024", "start": "2024-03-30T22:00:00Z", "end": "2024-03-31T21:00:00Z", "timestep": 60},
+    {"id": "autumn-local-day-2024", "start": "2024-10-26T21:00:00Z", "end": "2024-10-27T22:00:00Z", "timestep": 60},
+    {"id": "winter-2025", "start": "2025-01-01T00:00:00Z", "end": "2025-01-02T00:00:00Z", "timestep": 60},
+    {"id": "summer-2025", "start": "2025-07-01T00:00:00Z", "end": "2025-07-02T00:00:00Z", "timestep": 60},
+    {"id": "period-end-2025", "start": "2025-12-31T00:00:00Z", "end": "2026-01-01T00:00:00Z", "timestep": 60},
+    {"id": "ten-minute-resolution", "start": "2025-01-01T00:00:00Z", "end": "2025-01-01T01:00:00Z", "timestep": 10}
+  ]
+}

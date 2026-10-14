@@ -1,0 +1,13 @@
+__pycache__/
+.pytest_cache/
+.venv/
+.env
+*.log
+data/raw/*
+!data/raw/.gitkeep
+experiments/*.json
+experiments/*.csv
+experiments/source-audit/
+experiments/documentation_revision/
+experiments/research_plan_revision/
+docs/Li_Yu_Thesis_Research_Plan.original-*.docx
