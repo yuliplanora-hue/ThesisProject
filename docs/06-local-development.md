@@ -122,6 +122,8 @@ Avoid deleting the volume during normal development. Initialisation variables af
 Run administrative/ledger commands with `ENERGY_DB_ROLE` unset. The optional stack pins dbt Core 1.12.6/adapter 1.11.0 and leaves the base application pins unchanged. Child dbt connections use non-login `energy_transformer`, with DDL only in `dbt_weather` and accepted-weather source reads. Nine models/36 dbt tests and 15 separate synthetic graph controls pass on Windows/Linux. The actual candidate graph retains 17,544 hours (five incomplete) and 731 Helsinki dates (728 complete weather days); reporter access and accepted publication remain unchanged. [Time/reporting rules and evidence](27-weather-time-model.md) cover DST, ISO/leap boundaries, partial days and session timezone independence. See [the model runbook](26-weather-dbt-models.md) for role/authentication limits, artifact locations and CI scope.
 
 
+Hosted CI now passes on [commit c25c87f](https://github.com/yuliplanora-hue/ThesisProject/actions/runs/38896004389): Windows/Linux offline tests, PostgreSQL foundation and the weather dbt/Helsinki calendar job. Offline checks include model/operations CLI help; only the model job installs optional dbt dependencies. It uses synthetic inputs and does not read the local raw data or database archives. [CI publication and Windows regression evidence](23-scheduling-and-ci.md) records the initial failure and fix.
+
 ## Database backup/restore and query measurement
 
 ```powershell
@@ -146,7 +148,7 @@ This copies raw inputs, source-audit evidence, nonsecret contracts and `tests/fi
 .venv\Scripts\python.exe tools/check_wp1_fixtures.py
 ```
 
-This offline command verifies 55 hand-entered M1–M5 answers from 240 manufactured heat rows and 240 weather-hour rows. Cases cover the required six filters plus DST, missingness, zero and unequal-exposure controls. The 94-test suite includes fixture verification and corruption/wrong-answer rejection. These are reference controls for later SQL/DAX, not production models or passed E5. See [fixture definitions and the author-walkthrough template](19-reference-fixtures.md). Byte hashes remain stable across checkout through the scoped `.gitattributes` rule.
+This offline command verifies 55 hand-entered M1–M5 answers from 240 manufactured heat rows and 240 weather-hour rows. Cases cover the required six filters plus DST, missingness, zero and unequal-exposure controls. The 95-test suite includes fixture verification and corruption/wrong-answer rejection. These are reference controls for later SQL/DAX, not production models or passed E5. See [fixture definitions and the author-walkthrough template](19-reference-fixtures.md). Byte hashes remain stable across checkout through the scoped `.gitattributes` rule.
 
 ## Continuous integration and later deployment
 
@@ -163,9 +165,9 @@ To reproduce the relevant checks locally:
 .venv\Scripts\python.exe tools/database_foundation.py check
 ```
 
-The committed workflow is now published on GitHub. Review results under the repository's **Actions** tab and the pull request's **Checks** tab. The initial hosted success/failure/recovery URLs and commit are recorded in [the Helen/CI evidence](25-helen-source-intake.md); local Helen changes need their own subsequent commit/push for hosted validation. Merge enforcement additionally requires a branch rule making the checks required; this workflow alone does not configure that rule.
+The committed workflow is now published on GitHub. Review results under the repository's **Actions** tab and the pull request's **Checks** tab. The initial hosted success/failure/recovery URLs and commit are recorded in [the Helen/CI evidence](25-helen-source-intake.md); expanded Helen/dbt/calendar code now passes hosted CI on [c25c87f](https://github.com/yuliplanora-hue/ThesisProject/actions/runs/38896004389). A separate weather job installs `requirements-models.txt` and runs 15 model/calendar scenarios, including nine models/36 SQL tests. Merge enforcement additionally requires a branch rule making the checks required; this workflow alone does not configure that rule.
 
-Continuous deployment is deferred until there is an executable application and an agreed deployment target. Before introducing CD, define environment-specific configuration, migration/release ordering, health checks and rollback; for the conditional Fabric slice, confirm workspace/capacity and an approved authentication route. Successful CI must precede deployment. Extend CI with dbt/model and release checks when those artefacts exist, while keeping live-source acquisition separate from routine fixture checks.
+Continuous deployment is deferred until there is an executable application and an agreed deployment target. Before introducing CD, define environment-specific configuration, migration/release ordering, health checks and rollback; for the conditional Fabric slice, confirm workspace/capacity and an approved authentication route. Successful CI must precede deployment. Extend the current dbt/calendar checks with integrated release checks when those artefacts exist, while keeping live-source acquisition separate from routine fixture checks.
 
 ## Tooling to introduce during development
 

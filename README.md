@@ -1,5 +1,7 @@
 # Finnish District Heating Data Platform
 
+[![CI](https://github.com/yuliplanora-hue/ThesisProject/actions/workflows/ci.yml/badge.svg)](https://github.com/yuliplanora-hue/ThesisProject/actions/workflows/ci.yml)
+
 Build and evaluate a reliable data engineering and analytics platform using Helen district-heating data and FMI weather observations. This repository supports Li Yu’s TAMK master’s thesis and a balanced data analyst and data engineer portfolio.
 
 **Working title:** Design and Evaluation of a Reliable Data Engineering and Analytics Platform for Finnish District Heating
@@ -27,12 +29,12 @@ Evidence available as of 16 October 2026:
 | Helen CSV | Full explicit lexical audit: 91,767 rows, no rejected rows, duplicate timestamps or gaps in the written-clock sequence |
 | Source semantics | Publisher-linked current CSV hash and declared UTC labels verified; author-provided MWh/DH and consumption interpretation recorded; author-confirmed interval-end labels recorded; physical quantity/boundary, current-edition licence and paired acceptance remain open |
 | FMI feasibility | Full 2024–2025 weather window audited: 105,264 returned timestamps, 16 NaNs, 17,539/17,544 complete hours; source responses/manifests retained |
-| Offline tests | 94 pass on Windows/Linux; includes calendar/reference and model invocation/identity controls, Helen intake, permissions, scheduling, recovery and 55 metric controls |
+| Offline tests | 95 pass on Windows/Linux; includes calendar/reference and model invocation/identity controls, Helen intake, permissions, scheduling, recovery and 55 metric controls |
 | Database foundation | Seven migrations and explicit group-role CLI; 44 isolated database checks plus 15 separate dbt controls pass on Windows/Linux |
 | WP1 research preparation | Initial local package delivered: 15 selected references from 20 candidates, nine critical notes, author-confirmed selected-literature review, contracts, 55 controls, split and walkthrough fallback; academic/source/G5 conditions remain pending |
 | Station sensitivity | Airport 100968 preselected; four seasonal samples return 576/576 finite readings; full-period analytical comparison remains planned |
 | Source evidence backup | Latest local `backup/`: 3,146 file copies/three sample restores verified; author chose local-only backup and accepted the shared C: failure risk |
-| CI | Hosted green/red/green sequence verified on commit 9fb12dd (76 tests/39 DB checks); local Helen/dbt/calendar changes await their own commit/push |
+| CI | [Hosted CI passes](https://github.com/yuliplanora-hue/ThesisProject/actions/runs/38896004389) on `c25c87f`: 95 Windows/Linux tests, 44 PostgreSQL controls and 15 dbt/calendar scenarios (nine models/36 SQL tests); earlier controlled green/red/green retained |
 | Fabric access | Available per author confirmation; workspace/capacity/permissions and deployment still to verify |
 | FMI typed ingestion | 105,264 selected baseline rows loaded with 16 explicit NaNs; full replay inserts zero. Separate live query adds six retained revision rows |
 | Weather publication | Explicit 105-snapshot source-point release accepted; replay reuses its ID/checkpoint; correction/backfill/failure recovery verified in isolated fixtures |

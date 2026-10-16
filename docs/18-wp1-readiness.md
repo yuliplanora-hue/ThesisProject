@@ -19,7 +19,7 @@
 | Main evaluation route | Local reference selected (D-010); Fabric access author-confirmed | Verify Fabric deployment details in WP5.1; cloud access is not a deployed artefact |
 | Raw/reference backup | Latest 3,146-file local snapshot and three sample restores pass; earlier snapshot retained | Author explicitly chose local-only backup on 16 October; shared C: failure risk accepted. No external destination remains requested |
 | Reviewer/fallback | Author-only fallback selected; fixed rubric and empty recording template prepared | Execute after report exists; independent recruitment/privacy arrangements are conditional; no participation/scores claimed |
-| Reference controls | 55 hand-calculated metric answers over 11 scenarios verify in Python; 94 offline tests pass on Windows/Linux | Implement SQL/DAX independently and record actual results later; E5 not passed |
+| Reference controls | 55 hand-calculated metric answers over 11 scenarios verify in Python; 95 offline tests pass on Windows/Linux | Implement SQL/DAX independently and record actual results later; E5 not passed |
 | Statistical split | [2024 development/2025 holdout](../config/analysis-split-plan.json) predeclared | Apply after accepted paired alignment; replace only before heating-outcome exploration if the accepted period changes |
 | Final evaluation freeze | Initial [protocol/reference/fallback baseline](19-reference-fixtures.md) and [26-case execution catalogue](evaluation/case-catalogue.csv) delivered | Freeze accepted input/model/environment versions at G5; this later task does not imply an initial source/academic decision is complete |
 

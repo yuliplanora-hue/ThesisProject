@@ -68,7 +68,7 @@ Private evidence is under ignored `experiments/source-audit/`:
 - `model-checks/` and `linux-model-checks/`: synthetic build/failure/recovery results.
 - `code-snapshots/wp3.2-verified/` and `code-snapshots/wp3.3-verified/`: checksum-verified prior/current source and model versions; the latter also preserves the verification helpers and CI definition.
 
-The operational ledger now has 18 successful runs and the two previously retained startup failures, with no running attempt. Accepted source publication/checkpoint is unchanged. The existing CI model-check command exercises the extended graph locally in fresh Linux; hosted verification of these uncommitted changes remains pending commit/push.
+The operational ledger now has 18 successful runs and the two previously retained startup failures, with no running attempt. Accepted source publication/checkpoint is unchanged. The existing CI model-check command exercises the extended graph locally in fresh Linux; these changes are now published and [hosted CI passes on c25c87f](https://github.com/yuliplanora-hue/ThesisProject/actions/runs/38896004389) with 95 offline tests, 44 foundation controls and the 15 dbt/calendar scenarios.
 
 ## Query and lineage example
 

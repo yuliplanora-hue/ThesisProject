@@ -69,7 +69,7 @@ WP2.5's hosted success/failure/recovery criterion is now verified for committed 
 | [Controlled failure](https://github.com/yuliplanora-hue/ThesisProject/actions/runs/38888672505) | Only the explicit corrupted-fixture demonstration step fails; ordinary jobs remain green |
 | [Normal recovery](https://github.com/yuliplanora-hue/ThesisProject/actions/runs/38889103306) | Green on the same commit with probe disabled |
 
-Private metadata: `hosted-ci-evidence.json`. Tokens are never written to that evidence. New local Helen changes have their own local verification and need a subsequent commit/push before hosted CI can certify them. This completes the existing executable-slice CI/scheduling/recovery task; future dbt/integrated release checks remain with their model tasks. No persistent OS scheduler, required branch rule or CD deployment was configured.
+Private metadata: `hosted-ci-evidence.json`. Tokens are never written to that evidence. Helen intake and the subsequent weather/model/calendar work are now published; [expanded hosted CI passes on c25c87f](https://github.com/yuliplanora-hue/ThesisProject/actions/runs/38896004389). The earlier 83-test intake delivery and original 9fb12dd controlled sequence above remain dated evidence. This completes the existing executable-slice CI/scheduling/recovery task; future dbt/integrated release checks remain with their model tasks. No persistent OS scheduler, required branch rule or CD deployment was configured.
 
 ## WP1 clarifications recorded
 
