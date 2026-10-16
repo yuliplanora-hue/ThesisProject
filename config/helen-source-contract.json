@@ -1,7 +1,7 @@
 {
-  "contract_version": "0.3",
-  "declared_on": "2026-10-14",
-  "status": "publisher snapshot/UTC verified; author-confirmed interval-end label mapping; quantity/boundary/current-edition licence acceptance pending",
+  "contract_version": "0.4",
+  "declared_on": "2026-10-16",
+  "status": "Author confirms consumption, MWh and interval-end interpretation; source-faithful local intake accepted; publisher wording/current-edition licence remain unconfirmed",
   "source_id": "HELEN_DISTRICT_HEATING",
   "publisher_page": "https://www.helen.fi/en/about-us/helen/open-data",
   "local_snapshot": "data/raw/helen_open_dh_data_2015p01_2026p03b_v2.csv",
@@ -20,7 +20,7 @@
     "gap_duplicate_off_hour_findings": "none within the audited written-clock sequence"
   },
   "semantic_contract": {
-    "quantity_kind": null,
+    "quantity_kind": "consumption (author-provided interpretation)",
     "physical_unit": "MWh",
     "series_label": "district heating",
     "unit_evidence": "Author stated 'unit is mhw, dh means district heating' on 2026-10-14; spelling recorded as MWh to match dh_MWh. No publisher clarification supplied.",
@@ -36,10 +36,16 @@
     "interval_mapping_evidence": {
       "basis": "author clarification, not publisher confirmation",
       "recorded_on": "2026-10-14",
-      "author_statement": "interval start 10:00 , covers 09:00–10:00",
+      "author_statement": "interval start 10:00 , covers 09:00\u201310:00",
       "normalisation": "The explicit covered hour makes 10:00 the interval-end label; preserve the source label and subtract one elapsed UTC hour for canonical start.",
       "mapping": "interval_end_utc = parsed source UTC label; interval_start_utc = interval_end_utc - 1 hour"
-    }
+    },
+    "quantity_evidence": {
+      "recorded_on": "2026-10-16",
+      "author_statement": "consumption",
+      "basis": "Author clarification; not a publisher statement resolving the power/production wording"
+    },
+    "geographic_scope": "Helsinki aggregate series, as labelled by the publisher; exact supply/customer-meter boundary remains unconfirmed"
   },
   "licence_and_acquisition": {
     "catalogue_licence": "CC BY 4.0",
@@ -62,7 +68,7 @@
     "download_order_is_publisher_precedence": false
   },
   "paired_period": {
-    "status": "interval-end label mapping author-confirmed; quantity/boundary/licence and final paired acceptance pending",
+    "status": "Interval-end keys and author consumption interpretation recorded; analytical paired acceptance/current-edition licence and precise physical boundary still pending",
     "reporting_timezone": "Europe/Helsinki",
     "local_start": "2024-01-01T00:00:00+02:00",
     "local_end_exclusive": "2026-01-01T00:00:00+02:00",
@@ -75,7 +81,9 @@
     "lexical parsing",
     "unconverted profiling",
     "synthetic analytical fixtures",
-    "publisher-declared UTC observation-label accounting"
+    "publisher-declared UTC observation-label accounting",
+    "source-faithful database intake and quarantine under config/helen-ingestion.json",
+    "UTC interval-end/start lineage without energy conversion"
   ],
   "blocked_until_evidence": [
     "interpreted energy/power facts",
@@ -84,9 +92,9 @@
     "raw redistribution"
   ],
   "evidence_to_close": [
-    "quantity/interval meaning and reconciliation of publisher MW wording with author-provided MWh",
-    "precise system boundary",
-    "current-edition licence applicability",
-    "final paired physical acceptance and final revision/omission policy"
+    "Publisher reconciliation of MW/power/production wording with the author MWh/consumption interpretation, before claiming a confirmed physical boundary",
+    "Precise supply/customer-meter boundary for analytical report wording",
+    "Current-edition licence applicability before redistribution",
+    "Final paired analytical acceptance and revision/omission policy"
   ]
 }

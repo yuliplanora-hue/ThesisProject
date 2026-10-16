@@ -1,6 +1,6 @@
 # WP1 data-management and publication plan
 
-**Version:** 0.2, 14 October 2026. **Task:** WP1.4. **Owner:** Li Yu. **Status:** operational draft with verified local evidence copies; independent storage, reviewer arrangements, institutional retention decisions and final G5 freeze remain pending. This plan applies to the current public-source prototype and the proposed evaluation. No reviewer data has been collected by this development work.
+**Version:** 0.2, 14 October 2026. **Task:** WP1.4. **Owner:** Li Yu. **Status:** operational draft with verified local evidence copies; author-selected local-only storage, conditional reviewer arrangements, institutional retention decisions and final G5 freeze remain pending. This plan applies to the current public-source prototype and the proposed evaluation. No reviewer data has been collected by this development work.
 
 ## Data classes and handling
 
@@ -44,15 +44,23 @@ The WP2.4 snapshot is `backup/evidence-20261014T184003Z-b7b6cd54ea0d4ede92a2ff60
 .venv\Scripts\python.exe tools/backup_evidence.py --destination backup
 ```
 
-Repeat with an approved external-device or institutional-storage destination to provide an independent copy; verify its failure domain and access policy as well as checksums before changing the independent-backup status. The tool never infers storage independence from a path string.
-
-Select an institution-appropriate second storage location or encrypted external device, document the owner/access and backup schedule, then verify a sample restore. Do not place reviewer records in a consumer/public cloud account by default. The [Tampere University Library student guide](https://libguides.tuni.fi/open-science-for-students/data-management-and-data-protection) identifies institution storage options and explains the limits of consumer services for confidential data.
+On 16 October 2026, the author explicitly chose **no external backup**. Continue verified local snapshots under the ignored project `backup/` folder; the author accepts their shared C: failure risk. An independent copy is not claimed and is no longer a WP1 decision awaiting an external path. This replaces the earlier request for institutional/external storage. No reviewer records are collected; any future recruitment must establish its own applicable storage/privacy arrangements first.
 
 The WP2.5 snapshot, verified 15 October 2026, is `backup/evidence-20261015T175443Z-e0e7a102d8bd43b1986497684b5cfb5a/manifest.json`: **379 files, 57,073,526 input bytes and three sample restores passed**. It adds scheduled-run evidence and verified archived publication code; previous snapshots remain preserved. Storage is still on the same C: drive and is not a database backup.
 
 The latest WP3.1 snapshot, verified 16 October 2026, is `backup/evidence-20261016T103215Z-822c4590049348e58e4bdca1a0944c06/manifest.json`: **415 files, 57,273,156 input bytes and three sample restores passed**. It retains current role/replay evidence, both unsuccessful startup records and exact prior code versions. Independent storage and database restore remain pending.
 
-Proposed schedule: back up changed source snapshots/manifests after acquisition and before source cleanup; back up database state before migrations/final evaluation; verify restoration after the first backup and at the final release. Store backup location/access details privately if they identify accounts or devices. Weather reporting-role denial is verified under [WP3.1](24-database-permissions.md); final E4 and separate-database restore remain future work; the foundation's temporary-database checks are not a backup/restore test.
+Helen/CI delivery snapshot: `backup/evidence-20261016T104701Z-2429dbad61c6492786469e8879c741e7/manifest.json`; **438 files, 57,394,141 input bytes and three sample restores passed**. Earlier snapshots are preserved.
+
+WP3.2 model delivery snapshot: `backup/evidence-20261016T110931Z-4a65bcde0e02417ba189e596f37790df/manifest.json`; **1,316 files, 87,986,004 input bytes and three sample restores verified**. It preserves model manifests/catalogs/controls and archived source versions alongside raw evidence. Author-selected local-only storage remains unchanged; no database restore is implied.
+
+WP3.3 time/reporting snapshot: `backup/evidence-20261016T112300Z-9ddf790c69ce4edeac64818d1ca16de2/manifest.json`; **3,112 files, 126,727,874 input bytes and three sample restores verified**. It includes the calendar/reporting model artifacts, Windows/Linux controls and checksum-verified prior/current source snapshots. This remains the author-selected same-drive evidence backup; the subsequent WP3.4 database restore is documented separately.
+
+Proposed schedule: back up changed source snapshots/manifests after acquisition and before source cleanup; back up database state before migrations/final evaluation; verify restoration after the first backup and at the final release. Store backup location/access details privately if they identify accounts or devices. Weather reporting-role denial is verified under [WP3.1](24-database-permissions.md); separate-database restore is now verified under [WP3.4](28-database-operations.md), while final E4 remains future work. The foundation's migration checks are distinct from that actual backup/restore.
+
+Latest WP3.4 evidence copy: `backup/evidence-20261016T113850Z-c269cd921acd454b9042506628a6b1f7/manifest.json`; **3,146 files, 127,318,832 input bytes and three sample restores verified**. This file snapshot includes operations manifests, exact helper code, raw query plans and post-run environment context; the compressed database archives are separately retained under ignored `backup/database-*` and `backup/linux-database-operations/`.
+
+The current database now has actual checksum-verified logical backups and successful isolated restores on Windows/Linux: all 27 project table/view fingerprints, schema/audit records and accepted pointers/checkpoints match. Destination-only roles and candidate ownership are reconstructed and restricted reporter access is verified; source data and permissions remain unchanged. [The operations runbook](28-database-operations.md) records archive locations/hashes and retained failed/successful attempts. Dumps contain private Helen values; do not publish them. These same-drive archives do not add independent storage or prove fresh-cluster/PITR recovery/final E4.
 
 ## Proposed retention and disposal
 
@@ -92,7 +100,7 @@ Record AI assistance by date/task, affected artefacts, verification performed an
 - [x] Author-only walkthrough fallback selected and empty initial/retest recording template prepared.
 - [x] Local evidence copy and representative restore verified; latest snapshot includes reference fixtures.
 - [ ] Confirm retention calendar dates and applicable institutional requirements; independent-reviewer arrangements are conditional on later recruitment.
-- [ ] Choose and verify independent raw-data backup and restore.
+- [x] Author chose local-only backup and accepted shared-drive risk on 16 October; local hash/sample restores verified, no storage independence claimed.
 - [ ] Confirm current-snapshot Helen licence and final code/text licence.
 - [ ] Freeze the complete source/metric/fixture/protocol/input manifest at G5.
 

@@ -1,0 +1,10 @@
+version: 2
+sources:
+  - name: accepted_weather
+    schema: reporting
+    description: "Read-only accepted weather source-point boundary; requires an explicit pinned UUID."
+    tables:
+      - name: weather_release
+        description: "Accepted current and retained historical release metadata."
+      - name: weather_point
+        description: "One accepted release and expected ten-minute UTC slot, including explicit missing states."

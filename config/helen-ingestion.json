@@ -1,0 +1,13 @@
+{
+  "version": "0.1",
+  "scope": "Local unconverted Helen source values and quarantine only",
+  "parser_version": "helen-source-0.1",
+  "maximum_bytes": 10000000,
+  "maximum_records": 250000,
+  "timestamp_timezone": "UTC",
+  "interval_convention": "interval_end",
+  "interval_hours": 1,
+  "duplicate_policy": "quarantine_all_rows_with_the_same_valid_label",
+  "negative_policy": "retain_with_warning_without_physical_inference",
+  "analytical_publication": false
+}

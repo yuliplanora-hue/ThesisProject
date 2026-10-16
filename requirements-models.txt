@@ -1,0 +1,4 @@
+-r requirements-dev.txt
+-c requirements-models-lock.txt
+dbt-core==1.12.6
+dbt-postgres==1.11.0

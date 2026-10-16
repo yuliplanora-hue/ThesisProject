@@ -68,6 +68,8 @@ E1–E5 and E7 mainly use controlled artificial/computational checks. E6 offers 
 | Personas, scope and task/rubric draft | Documented | Pilot/review later; no independent validation claimed |
 | Master’s-level contribution/assessment details | Pending | Supervisor/programme agreement |
 | Submission target and programme milestones | End-of-2026 deadline author-confirmed; exact Wihi/review dates pending | November–May assumptions superseded; confirm exact submission route/date |
+| Selected literature review | Author reports completed, 16 October 2026 | Initial core-reference review closed; final report synthesis/citation checks continue |
+| Backup destination | Local-only backup explicitly selected, 16 October 2026 | Shared C: risk accepted; no external destination remains requested |
 | Fabric access | Available, author-confirmed 14 October 2026 | D-011; verify workspace/capacity/permissions, expiry and deployment route in WP5.1 |
 | Commissioner/permit route and reviewer arrangements | Pending where applicable | D-013 and data-management decisions |
 | Author-only task walkthrough fallback | Selected by author on 14 October 2026 | Fixed rubric and initial/retest template in [the initial evaluation baseline](19-reference-fixtures.md); independent availability unknown |

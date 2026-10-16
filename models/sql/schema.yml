@@ -1,0 +1,85 @@
+version: 2
+models:
+  - name: stg_weather_release
+    description: "Exactly one pinned accepted source-point release, never a moving current pointer."
+    columns:
+      - name: release_id
+        description: "Explicitly selected accepted UUID."
+        data_tests: [not_null, unique]
+      - name: station_id
+        data_tests: [not_null]
+  - name: stg_weather_point
+    description: "Pinned point values/quality and chosen original snapshot/point lineage."
+    columns:
+      - name: release_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_weather_release')
+                field: release_id
+      - name: observed_at_utc
+        data_tests: [not_null, unique]
+      - name: source_quality
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [observed, source_nan, source_absent]
+  - name: int_weather_hour
+    description: "Independent UTC hour spine and explicit six-slot quality accounting. Candidate table only."
+    columns:
+      - name: hour_start_utc
+        data_tests: [not_null, unique]
+  - name: fct_weather_hour
+    description: "Candidate hourly mean of six finite sampled one-minute readings; incomplete hours remain NULL; never imputed. Not accepted Gold."
+    columns:
+      - name: hour_start_utc
+        description: "UTC business key within the pinned release/station."
+        data_tests: [not_null, unique]
+      - name: release_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_weather_release')
+                field: release_id
+  - name: weather_hour_lineage
+    description: "Every published slot mapped to its UTC hour, retaining source NaN/absent and snapshot/index distinctions."
+    columns:
+      - name: observed_at_utc
+        data_tests: [not_null, unique]
+      - name: hour_start_utc
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('fct_weather_hour')
+                field: hour_start_utc
+  - name: dim_hour
+    description: "Release-scoped UTC hour key, Helsinki civil labels, UTC offset and fold (0 first/1 repeated autumn hour). Local labels are not keys."
+    columns:
+      - name: hour_start_utc
+        data_tests: [not_null, unique]
+      - name: local_date
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: local_date
+  - name: dim_date
+    description: "Every Helsinki date intersecting the source window, full civil-day bounds, 23/24/25 elapsed hours and explicit partial-window coverage."
+    columns:
+      - name: local_date
+        data_tests: [not_null, unique]
+  - name: weather_report_hour
+    description: "Private candidate reporting view; one-to-one UTC fact/calendar alignment preserves incomplete hours and point lineage via weather_hour_lineage."
+    columns:
+      - name: hour_start_utc
+        data_tests: [not_null, unique]
+      - name: local_date
+        data_tests: [not_null]
+  - name: weather_report_day
+    description: "All intersecting Helsinki dates; mean only for a whole local day with every elapsed hour complete. Partial/incomplete days retain counts and NULL temperature. Not paired heat/weather or accepted Gold."
+    columns:
+      - name: local_date
+        data_tests: [not_null, unique]

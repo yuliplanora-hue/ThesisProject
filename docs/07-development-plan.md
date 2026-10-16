@@ -10,7 +10,7 @@ This supersedes the earlier 20-hour/week, November–May, 28-week calendar. Actu
 
 Deliver one local reference platform integrating Helen and FMI, an audited historical period, a tested dimensional model, five measures, three report pages, a statistical case study, an Excel audit and a two-page decision memo. Answer RQ1/RQ2 through E1–E7. Demonstrate one bounded Fabric deployment if access permits, then package two career case studies and a 5–7 minute demo.
 
-**Current technical delivery:** WP2.1 foundation and WP2.3 weather-point ingestion are complete. WP2.4 weather-only publication/recovery is verified; Helen and hourly/combined Gold integration remain pending their contracts/models. WP2.5 adds bounded local scheduling and an opt-in CI failure demonstration; hosted CI evidence remains pending. WP1/G1 are still open for the source, academic, storage and thesis-review conditions recorded in [the tracker](12-execution-tracker.md).
+**Current technical delivery:** WP2.1 foundation, WP2.2 source-value Helen intake and WP2.3 weather-point ingestion are complete. WP2.4 weather-only publication/recovery is verified; Helen and hourly/combined Gold integration remain pending their contracts/models. WP2.5 adds bounded local scheduling and an opt-in CI failure demonstration; hosted CI green/red/green evidence is now verified for baseline 9fb12dd. Selected-literature review is author-confirmed complete and local-only backup is author-selected. WP1/G1 remain open for source analytical/licence acceptance, academic metadata and applicable retention conditions in [the tracker](12-execution-tracker.md); final G5 freeze remains scheduled separately.
 
 The author confirmed topic/RQ approval and Fabric access, but workspace/capacity/permissions still need verification. Source-dependent conversions wait for accepted physical semantics and licence conditions. Current evidence and next actions are in [the execution tracker](12-execution-tracker.md); development checks are not final E1–E7 results. Count October work once against its task, with actual author hours to be recorded.
 
@@ -95,7 +95,7 @@ Tasks below define the completion targets; current status is maintained in [the 
 
 ### WP2 Ingestion and reliability
 
-**WP2 delivery status, 15 October 2026:** foundation and weather ingestion are complete; weather publication/recovery is delivered separately from the pending integrated Helen/Gold graph. The bounded scheduler and recovery procedure are in [the WP2.5 runbook](23-scheduling-and-ci.md). Hosted CI success/failure URLs and future model checks remain completion conditions. The WP2.5 budget stays 15 hours; actual author hours remain unrecorded.
+**WP2 delivery status, 16 October 2026:** foundation, weather ingestion and Helen source-value intake/quarantine are delivered. Weather release/recovery and executable-slice hosted CI green/red/green are verified for committed baseline 9fb12dd; local Helen code has 83 Windows/Linux tests and 44 database checks. [Helen/CI evidence](25-helen-source-intake.md) records actual runs. Integrated Helen/Gold publication remains conditional on analytical/model prerequisites. Future model checks belong to their implementation tasks. The WP2.5 budget stays 15 hours; actual author hours remain unrecorded.
 
 | Task | Hours | Dependencies | Deliverable and completion check |
 | --- | ---: | --- | --- |
@@ -107,7 +107,7 @@ Tasks below define the completion targets; current status is maintained in [the 
 
 ### WP3 SQL and data modelling
 
-**WP3.1 weather slice delivered, 16 October 2026:** five migrations rebuild cleanly; explicit non-login loader/reporter groups and accepted-weather reporting views enforce read/write boundaries. 76 offline tests and 39 database controls pass on Windows/Linux. Real loader replay preserves accepted data/checkpoint; two startup failures are retained with their fix. [Permission runbook](24-database-permissions.md) records commands and limits. Full integrated schemas, dedicated persistent logins and final E4 remain open; next is the weather-first WP3.2 dbt graph.
+**WP3 delivery status, 16 October 2026:** seven migrations, source-only Helen loading and separate loader/reporter/transformer groups remain verified. The [WP3.2 graph](26-weather-dbt-models.md) now includes the [WP3.3 weather time/reporting slice](27-weather-time-model.md): nine private candidate models/36 SQL tests and 15 manufactured scenarios pass on Windows/Linux, alongside 94 offline tests and 44 database foundation controls. All 17,544 actual UTC hours and 731 Helsinki dates match independent arithmetic/calendar checks; 728 days are complete and three remain NULL with explicit missingness. Raw-point lineage and accepted source publication/checkpoint are preserved. Integrated Helen/station/system/Gold models, persistent logins and final E4 remain open. [WP3.4 operations](28-database-operations.md) now verifies a full 27-relation snapshot/restore, destination-only roles/ownership and five-repeat index lookup comparison on Windows/Linux; source data/publication remain unchanged. Next is WP4.1 metric reference SQL using the manufactured controls while actual paired-source acceptance stays open.
 
 | Task | Hours | Dependencies | Deliverable and completion check |
 | --- | ---: | --- | --- |
@@ -183,8 +183,12 @@ These actions are part of WP1/WP2, not extra hours:
 - [x] Complete WP2.3 under the accepted weather-only contract: typed source-resolution load/replay, repeated bounded live extraction and timeout/failure checks; 52 offline tests and 16 database checks pass.
 - [x] Deliver the weather-only WP2.4 release/revision/backfill/checkpoint and interruption-recovery path; 61 offline tests and 25 database checks pass. Integrate Helen and the complete Gold graph after their prerequisites.
 - [x] Deliver WP2.5 bounded local scheduling/recovery and opt-in CI failure preparation; 72 Windows/Linux tests, 28 database checks and current workflow lint pass. Two real replay ticks preserve the release/checkpoint.
-- [ ] Record hosted CI green/red/recovery URLs and commit before closing WP2.5; add future model checks when implemented.
+- [x] Record hosted CI green/red/recovery URLs and commit 9fb12dd, completing WP2.5’s executable-slice criterion; new local Helen code awaits its own publication. Add future model checks with those models.
+- [x] Deliver WP2.2 local Helen source values, lineage/quarantine and real load/replay; 91,767 rows, zero source quarantine; suite 83/44 on Windows/Linux.
 - [x] Deliver WP3.1’s accepted-weather schema/permission slice: five migrations, real restricted-login enforcement, 76 offline tests/39 database controls on Windows/Linux; track full integrated schemas/logins separately.
+- [x] Deliver WP3.2 weather-first dbt candidates: five models/22 tests, nine Windows/Linux controls and 17,544 independent hourly comparisons. Reporter/accepted publication remain unchanged; integrated model scope stays open.
+- [x] Deliver WP3.3 weather UTC/Helsinki dimensions and hourly/daily candidate reports: nine models/36 tests, 15 Windows/Linux scenarios, 17,544 independent hour labels and 731 dates/728 complete days. Partial/DST cases and lineage pass; integrated Gold remains gated.
+- [x] Deliver WP3.4 for the current local prototype: full snapshot/restore comparison, reconstructed restricted roles/ownership and measured index lookup with identical results. Archives/plans/code retained; 94 offline tests pass on Windows/Linux. Final E4/full-load/incremental experiments remain later.
 - [x] Record end-of-2026 deadline, increased 50–55-hour weekly capacity and full-scope 11-week calendar. Exact academic review/submission details remain pending.
 
 ## Scope and risk control

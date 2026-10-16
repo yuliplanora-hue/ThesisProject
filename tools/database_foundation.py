@@ -96,7 +96,7 @@ def check_foundation() -> dict:
             created = True
             with connect(database) as connection:
                 first = apply_migrations(connection)
-                if first != ["001_operational_ledger.sql", "002_acquisition_provenance.sql", "003_weather_observations.sql", "004_weather_publication.sql", "005_reporting_boundary.sql"] or apply_migrations(connection) != []:
+                if first != ["001_operational_ledger.sql", "002_acquisition_provenance.sql", "003_weather_observations.sql", "004_weather_publication.sql", "005_reporting_boundary.sql", "006_helen_source_intake.sql", "007_weather_model_build.sql"] or apply_migrations(connection) != []:
                     raise ValueError("Fresh build or migration replay did not match expectations")
                 results.append("fresh_migration_and_replay")
                 with tempfile.TemporaryDirectory() as directory:

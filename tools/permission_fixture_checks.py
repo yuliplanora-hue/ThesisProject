@@ -13,6 +13,7 @@ from ingestion.database import begin_run, connection_settings, finish_run
 from ingestion.permissions import provision_roles
 from ingestion.publication import publish_weather
 from ingestion.weather import ingest_weather
+from tools.helen_fixture_checks import check_helen
 
 
 def check_permissions(admin, database, root, settings, manifest, plan):
@@ -125,6 +126,7 @@ def check_permissions(admin, database, root, settings, manifest, plan):
         for statement in (
             "UPDATE silver.weather_observation SET temperature_c=0 WHERE false",
             "UPDATE publication.weather_point SET temperature_c=0 WHERE false",
+            "UPDATE silver.helen_source_record SET source_measurement=0 WHERE false",
             "DELETE FROM ops.release WHERE false",
             "TRUNCATE silver.weather_observation",
             "SELECT * FROM ops.schema_migration LIMIT 0",
@@ -171,6 +173,7 @@ def check_permissions(admin, database, root, settings, manifest, plan):
         admin.execute(sql.SQL("REVOKE {} FROM {}").format(sql.Identifier(reporter), sql.Identifier(reporter_login)))
         denied(report, "SELECT * FROM reporting.weather_point LIMIT 0")
         results.append("public_role_has_no_reporting_access_after_membership_revocation")
+        results.extend(check_helen(admin, load))
         return results
     finally:
         for connection in connections:

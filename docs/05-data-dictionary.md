@@ -1,6 +1,6 @@
 # Analytical data dictionary and contracts
 
-**Version:** 0.6, 16 October 2026. Operational provenance and FMI source-resolution Silver tables are implemented; Helen/hourly/Gold fields/models remain proposed. Migrations 001–005 define current objects, including accepted-weather reporting views and PUBLIC access hardening; [typed weather ingestion](21-weather-ingestion.md) preserves Decimal values, NULL/source_nan states, original source text/index and run/snapshot lineage. Acquisition manifests are linked to PostgreSQL, with raw XML retained. Physical analytical precision and source mappings must be confirmed in WP1.3/WP3.1. See [source evidence](02-source-inventory.md), [architecture](08-architecture.md) and [metric definitions](09-metric-catalog.md).
+**Version:** 0.8, 16 October 2026. Operational provenance and FMI source-resolution Silver tables are implemented; Helen source intake, private weather-hour/calendar candidates and hourly/daily reporting are implemented; interpreted Helen, integrated station/system dimensions and accepted Gold remain proposed. Migrations 001–007 define current objects, including accepted-weather reporting views and PUBLIC access hardening; [typed weather ingestion](21-weather-ingestion.md) preserves Decimal values, NULL/source_nan states, original source text/index and run/snapshot lineage. Acquisition manifests are linked to PostgreSQL, with raw XML retained. Physical analytical precision and source mappings must be confirmed in WP1.3/WP3.1. See [source evidence](02-source-inventory.md), [architecture](08-architecture.md) and [metric definitions](09-metric-catalog.md).
 
 ## Source mappings
 
@@ -9,7 +9,7 @@
 | Helen `datetime_utc` | Day-first text, example `12.10.2015 06:00` | Preserve as `source_timestamp`; parse as UTC interval end, derive start by subtracting one elapsed hour | Publisher-declared UTC; author-confirmed end labels (`10:00` covers `[09:00,10:00)`); quantity/boundary still pending |
 | Helen `dh_MWh` | Decimal-comma string | Preserve as `source_value`; parse a decimal; map to `energy_mwh` or verified source quantity | Header alone does not establish interval energy or permitted MW conversion |
 | FMI station identity | Full weather audit uses `100971`, Helsinki Kaisaniemi, returned coordinates `60.17523 24.94459` | `station_id` with station metadata | Project baseline is a single central urban proxy; station sensitivity and paired alignment remain to validate |
-| FMI temperature value/time | `t2m`, explicit UTC, `degC`, one-minute source average (`PT1M`), sampled every ten minutes | Original value/time plus typed observation and quality flags | Baseline mean needs six finite samples/hour; 16 NaNs/five incomplete hours retained. Analytical aggregation still to implement/test |
+| FMI temperature value/time | `t2m`, explicit UTC, `degC`, one-minute source average (`PT1M`), sampled every ten minutes | Original value/time plus typed observation and quality flags | Baseline mean needs six finite samples/hour; 16 NaNs/five incomplete hours retained. Six-sample hourly candidate aggregation is implemented/tested in dbt; final analytical acceptance remains separate |
 
 Keep an explicit parser/contract version. Unknown schemas fail visibly; invalid rows retain reasons. Do not silently treat invalid text as missing or convert a local time to UTC without resolving ambiguity.
 
@@ -40,6 +40,15 @@ Keep an explicit parser/contract version. Unknown schemas fail visibly; invalid 
 | `ops.accepted_release`, `ops.publication_checkpoint` | One current pointer/checkpoint per weather stream | Implemented atomic acceptance and completed-window marker |
 | `reporting.weather_release` | One accepted weather release | Implemented current/historical accepted metadata; failed candidates excluded |
 | `reporting.weather_point` | Accepted release × expected ten-minute key | Implemented SELECT-only reporter boundary with chosen lineage; queries must pin one release |
+| `ops.helen_snapshot_load` | One source-content snapshot | Implemented parser/intake-contract/first-run identity and exhaustive source/valid/quarantine counts |
+| `silver.helen_source_record` | Snapshot × source-record index | Implemented original fields, unconverted numeric value, interval lineage and quarantine/warnings; no analytical heat approval |
+| `dbt_weather.stg_weather_release`, `stg_weather_point` | Explicit selected UUID / release × ten-minute slot | Implemented private staging views from accepted reporting sources |
+| `dbt_weather.int_weather_hour`, `fct_weather_hour` | Selected release × station × parameter × UTC hour | Implemented candidate counts and six-finite-sample mean; incomplete hours remain NULL, no fill |
+| `dbt_weather.weather_hour_lineage` | Selected slot × its UTC hour | Implemented complete chosen snapshot/index/quality lineage; not a published Gold object |
+| `dbt_weather.dim_hour` | Selected release × UTC hour | Implemented expected-hour spine, Helsinki timestamp/date/hour, offset minutes and fold; civil labels are not keys |
+| `dbt_weather.dim_date` | Selected release × intersecting Helsinki date | Implemented calendar/ISO attributes, full local-day UTC bounds, expected 23/24/25 hours and release coverage |
+| `dbt_weather.weather_report_hour` | Selected release × station × parameter × UTC hour | Implemented one-to-one left-aligned fact/calendar candidate; every incomplete hour retained |
+| `dbt_weather.weather_report_day` | Selected release × station × parameter × Helsinki date | Implemented coverage/missingness candidate; temperature only for a fully covered day with all expected hours complete |
 
 Business-key uniqueness is enforced within each released dataset. Silver retains revisions rather than overwriting history. Physical tables or views may include `release_id`; reporting views expose accepted current/historical revisions; each analysis must filter one pinned accepted release. [Role and view permissions](24-database-permissions.md) deny reporter writes and direct source/operational access. Weather aggregation needs lineage from each contributing observation, not just a single arbitrary source row.
 
@@ -53,6 +62,9 @@ Business-key uniqueness is enforced within each released dataset. Silver retains
 | `observed_at_utc` | timezone-aware timestamp | Original observation instant when the source is instantaneous; do not invent interval energy |
 | `interval_hours` | decimal | `(end - start)` expressed in elapsed hours, not local clock subtraction |
 | `local_date`, `local_hour`, `utc_offset_minutes` | date, integer, integer | Derived Europe/Helsinki labels; local clock time alone is not a key |
+| `local_fold` | integer, 0 or 1 | Helsinki first occurrence / repeated autumn occurrence, derived from the instant even at a partial-window boundary |
+| `expected_day_hour_count`, `release_hour_count`, `is_full_day_in_release` | integer, integer, boolean | Full civil-day elapsed hours, hours within the pinned release, and full-window coverage |
+| `is_complete_weather_day` | boolean | Full local day covered and every expected elapsed hour complete; otherwise daily temperature is NULL |
 | `source_timestamp`, `source_value`, `source_unit` | text | Original content retained for audit |
 | `energy_mwh` | decimal, nullable | Verified interval energy only; missing stays null, not zero |
 | `average_power_mw` | decimal, nullable | Verified interval-average power, or interval energy divided by confirmed duration |
@@ -82,7 +94,7 @@ At raw ingestion, classify every row as accepted candidate, rejected or duplicat
 5. Current source revision selection follows a declared precedence rule; acquisition time alone is not a proven publisher version order.
 6. Add slowly changing dimensions only if real changing metadata requires them. Forecast facts belong to an approved stretch extension.
 
-Observed FMI details and the still-unresolved Helen semantics are recorded in [the source audit](11-source-audit.md). Standalone audit helpers inspect points/manifests; [the weather loader](21-weather-ingestion.md) now populates typed Silver observations with lineage and replay checks. Operational provenance and weather-load metadata are implemented; Weather source-point publication is implemented separately; Helen Silver and all hourly/combined Gold objects remain proposed. See the current weather runbook for input-set and database counts; the earlier operational runbook preserves the WP2.1 delivery baseline.
+Observed FMI details and the still-unresolved Helen semantics are recorded in [the source audit](11-source-audit.md). Standalone audit helpers inspect points/manifests; [the weather loader](21-weather-ingestion.md) now populates typed Silver observations with lineage and replay checks. Operational provenance, weather-load metadata, accepted weather source-point publication and Helen source-value Silver intake are implemented. Private hourly/calendar/daily candidates are verified in [WP3.3](27-weather-time-model.md); interpreted Helen and accepted combined Gold remain proposed. See the current weather runbook for input-set and database counts; the earlier operational runbook preserves the WP2.1 delivery baseline.
 
 ## Contract approval record
 

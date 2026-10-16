@@ -25,20 +25,23 @@ Evidence available as of 16 October 2026:
 | PostgreSQL through Docker Compose | Started and verified during setup; use the setup guide to check current runtime state |
 | Git | Local repository initialised; GitHub destination: [ThesisProject](https://github.com/yuliplanora-hue/ThesisProject) |
 | Helen CSV | Full explicit lexical audit: 91,767 rows, no rejected rows, duplicate timestamps or gaps in the written-clock sequence |
-| Source semantics | Publisher-linked current CSV hash and declared UTC labels verified; author-provided MWh/DH recorded; author-confirmed interval-end labels recorded; physical quantity/boundary, current-edition licence and paired acceptance remain open |
+| Source semantics | Publisher-linked current CSV hash and declared UTC labels verified; author-provided MWh/DH and consumption interpretation recorded; author-confirmed interval-end labels recorded; physical quantity/boundary, current-edition licence and paired acceptance remain open |
 | FMI feasibility | Full 2024–2025 weather window audited: 105,264 returned timestamps, 16 NaNs, 17,539/17,544 complete hours; source responses/manifests retained |
-| Offline tests | 76 pass on Windows/Linux; includes role-name/connection controls, scheduling, publication/recovery and 55 metric controls |
-| Database foundation | Five migrations and explicit group-role CLI; 39 isolated database checks pass on Windows/Linux, including real restricted-logins and publication/recovery |
-| WP1 research preparation | Initial local package delivered: 15 selected references from 20 candidates, nine critical notes, contracts, 55 controls, statistical split and author-selected walkthrough fallback; closure conditions remain pending |
+| Offline tests | 94 pass on Windows/Linux; includes calendar/reference and model invocation/identity controls, Helen intake, permissions, scheduling, recovery and 55 metric controls |
+| Database foundation | Seven migrations and explicit group-role CLI; 44 isolated database checks plus 15 separate dbt controls pass on Windows/Linux |
+| WP1 research preparation | Initial local package delivered: 15 selected references from 20 candidates, nine critical notes, author-confirmed selected-literature review, contracts, 55 controls, split and walkthrough fallback; academic/source/G5 conditions remain pending |
 | Station sensitivity | Airport 100968 preselected; four seasonal samples return 576/576 finite readings; full-period analytical comparison remains planned |
-| Source evidence backup | Latest local `backup/`: 415 file copies and three sample restores verified; earlier snapshot preserved; independent storage remains pending |
-| CI | Windows/Linux and PostgreSQL workflow linted; opt-in visible failure probe added and verified locally; hosted execution pending publication |
+| Source evidence backup | Latest local `backup/`: 3,146 file copies/three sample restores verified; author chose local-only backup and accepted the shared C: failure risk |
+| CI | Hosted green/red/green sequence verified on commit 9fb12dd (76 tests/39 DB checks); local Helen/dbt/calendar changes await their own commit/push |
 | Fabric access | Available per author confirmation; workspace/capacity/permissions and deployment still to verify |
 | FMI typed ingestion | 105,264 selected baseline rows loaded with 16 explicit NaNs; full replay inserts zero. Separate live query adds six retained revision rows |
 | Weather publication | Explicit 105-snapshot source-point release accepted; replay reuses its ID/checkpoint; correction/backfill/failure recovery verified in isolated fixtures |
 | Database permissions | Non-login loader/reporter groups provisioned; reporting views expose accepted weather revisions; writes/raw access denied. Dedicated application/BI logins remain to configure |
 | Local scheduling | Two bounded CLI ticks reuse the accepted weather release/checkpoint; overlap and failure-stop controls verified; no persistent OS task registered |
-| Helen ingestion, SQL/dbt/hourly/combined Gold models, Power BI, Fabric and CD | Planned; integrated publication, permissions, deployment and final experiments remain to implement |
+| Helen source intake | 91,767 records loaded/replayed through the loader; zero quarantine on real input; original strings and source revisions retained; no analytical heating release |
+| Weather dbt candidate graph | Nine models/36 tests pass; UTC/Helsinki dimensions and hourly/daily reports retain 17,544 hours and 731 dates (728 complete weather days); source lineage retained; accepted publication unchanged |
+| Database restore and query optimisation | Full 27-relation snapshot/restore match and restricted-reporter checks pass on Windows/Linux; trial index returns identical results across five repetitions; working database unchanged |
+| Interpreted Helen, combined Gold, Power BI, Fabric and CD | Planned; integrated station/system dimensions, accepted publication, BI/deployment and final experiments remain to implement |
 
 The available [CSV profiler](tools/profile_csv.py) is a generic inspection utility. Its report does not certify units, time semantics, expected-hour completeness or business-key uniqueness.
 
@@ -84,6 +87,10 @@ Core research remains executable locally. Forecasting, another source such as Fi
 | [22 Weather publication](docs/22-weather-publication.md) | WP2.4 frozen source layers, accepted release/checkpoint, reader pinning and interruption recovery |
 | [23 Scheduling and CI](docs/23-scheduling-and-ci.md) | WP2.5 bounded replay, failure diagnosis, real execution IDs and hosted CI completion procedure |
 | [24 Database permissions](docs/24-database-permissions.md) | WP3.1 reporting views, group roles, real restricted-login checks and retained failure evidence |
+| [25 Helen source intake](docs/25-helen-source-intake.md) | WP2.2 source-value lineage/quarantine, actual replay and hosted CI completion evidence |
+| [26 Weather dbt models](docs/26-weather-dbt-models.md) | WP3.2 candidate graph, pinned release, transformer permissions, SQL tests and independent hourly verification |
+| [27 Weather time model](docs/27-weather-time-model.md) | WP3.3 UTC/Helsinki dimensions, DST/partial-day rules, hourly/daily reporting and full-window verification |
+| [28 Database operations](docs/28-database-operations.md) | WP3.4 snapshot backup/isolated restore, destination roles, raw query plans/timings and recovery limits |
 
 ## First practical run
 

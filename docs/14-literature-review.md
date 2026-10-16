@@ -68,9 +68,13 @@ The 15 core references cover DSR/evaluation (L01/L02), consumer/metric quality (
 
 ## Remaining reading and synthesis
 
-1. The author verifies the nine critical selected-passage notes against their primary copies, then completes remaining full-paper method/evaluation reading of the 15 core references. Prioritise L11/L14/L15/L16 and unverified assumptions/sections in the notes. Access reserved L12/L13 lawfully if their methods/background are needed.
+1. The author confirms selected-literature review completed on 16 October. Use the nine notes and 15 core references in the report synthesis and verify final quotations/citations against the primary copies. Follow up uncertain assumptions or reserve L12/L13 only if the thesis needs them; reserve reading is not part of the confirmation.
 2. Perform broader TAMK library/Scopus searches with explicit topic/Boolean queries, or document an alternative route if unavailable. Follow up the six queued metadata-search titles and verify version relationships; export candidates and record inclusions/exclusions. These account-based searches have not occurred.
 3. Add recent reproducibility/analytics-evaluation studies if they change the design rationale; retain a justified final set around the proposed 15–20 scholarly-source target.
 4. Write the critical comparison that establishes the specific research gap and justified design contribution; review it with the supervisor. A citation count is not completion evidence.
 
-The initial WP1.2 selection/rationale deliverable is available: 20-candidate matrix, 15-reference core selection, 45-hit screening export, nine targeted critical notes, bounded contribution comparison and six rationale links. Overall critical thesis review remains **in progress**. See [the scope record](13-scope-and-method.md) and [the execution tracker](12-execution-tracker.md).
+The initial WP1.2 selection/rationale deliverable is available: 20-candidate matrix, 15-reference core selection, 45-hit screening export, nine targeted critical notes, bounded contribution comparison and six rationale links. The initial selected-literature author review is now **author-confirmed complete**; final report synthesis/citation review continues. See [the scope record](13-scope-and-method.md) and [the execution tracker](12-execution-tracker.md).
+
+## Author review update, 16 October 2026
+
+The author reports reviewing the selected literature. Record the initial 15-core-reference author-review step as completed, while preserving the actual passage/access levels of the assisted notes and five reserve candidates. No new per-paper reading depth, hours or agent full-text access is inferred. Final thesis synthesis, citation accuracy and supervisor/report revisions continue; this confirmation does not complete later academic submission tasks.

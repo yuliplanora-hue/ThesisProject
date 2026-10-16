@@ -37,7 +37,7 @@ A verification pass caught and corrected an initial hand-entered peak label: inc
 .venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-The [checker](../tools/check_wp1_fixtures.py) computes direct Decimal reference arithmetic from the pinned inputs and compares it with the separately entered answers. Three [offline regression checks](../tests/test_wp1_reference_fixtures.py) cover all answers, input checksum corruption and an incorrect expected numeric answer after a valid checksum. Total offline suite after WP3.1 role/connection controls: 76 tests. Numeric agreement uses an absolute tolerance of `0.000001`; identifiers, counts, memberships, states, offsets and blank reasons match exactly.
+The [checker](../tools/check_wp1_fixtures.py) computes direct Decimal reference arithmetic from the pinned inputs and compares it with the separately entered answers. Three [offline regression checks](../tests/test_wp1_reference_fixtures.py) cover all answers, input checksum corruption and an incorrect expected numeric answer after a valid checksum. Total offline suite after model identity/invocation, calendar reference and operations-boundary controls: 94 tests. Numeric agreement uses an absolute tolerance of `0.000001`; identifiers, counts, memberships, states, offsets and blank reasons match exactly.
 
 In WP4/E5, implement SQL and DAX independently and apply the same input/scenario filters. Store each implementation's actual outputs separately, alongside fixture/metric/release/version identifiers; preserve failures and retests. The checker is a reference-control utility, not production modelling code. Do not populate final SQL/DAX result records with its expected answers.
 

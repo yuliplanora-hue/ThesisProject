@@ -18,7 +18,8 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     database = commands.add_parser("database", help="Migrate or check the operational database")
-    database.add_argument("action", choices=("migrate", "check", "roles"))
+    database.add_argument("action", choices=("migrate", "check", "roles", "model-role"))
+    database.add_argument("--model-role", default="energy_transformer")
     database.add_argument("--loader-role", default="energy_loader")
     database.add_argument("--reporter-role", default="energy_reporter")
     manifests = commands.add_parser("manifests", help="Inspect or record retained acquisition evidence")
@@ -38,6 +39,12 @@ def main(argv=None) -> int:
     weather.add_argument("--configuration", type=Path, default=Path("config/foundation.json"))
     weather.add_argument("--weather-contract", type=Path, default=Path("config/weather-ingestion.json"))
     weather.add_argument("--raw-directory", type=Path)
+    helen = commands.add_parser("helen", help="Load unconverted Helen source values and quarantine")
+    helen.add_argument("action", choices=("load",))
+    helen.add_argument("--manifest", type=Path, required=True)
+    helen.add_argument("--configuration", type=Path, default=Path("config/foundation.json"))
+    helen.add_argument("--intake-contract", type=Path, default=Path("config/helen-ingestion.json"))
+    helen.add_argument("--raw-directory", type=Path)
     release = commands.add_parser("release", help="Publish/resume an explicit weather source-point plan")
     release.add_argument("action", choices=("publish", "resume", "status"))
     release.add_argument("--plan", type=Path, default=Path("config/weather-release-plan.json"))
@@ -50,9 +57,38 @@ def main(argv=None) -> int:
     schedule.add_argument("--interval-seconds", type=int, default=60)
     schedule.add_argument("--timeout-seconds", type=int, default=300)
     schedule.add_argument("--max-seconds", type=int, default=900)
+    models = commands.add_parser("models", help="Build/check candidate dbt weather models")
+    models.add_argument("action", choices=("build", "check"))
+    models.add_argument("--release-id", help="Required accepted weather UUID for build")
     args = parser.parse_args(argv)
     root = Path.cwd().resolve()
     try:
+        if args.command == "models":
+            if args.action == "check":
+                if args.release_id:
+                    raise ValueError("Isolated model checks do not take a working release")
+                from tools.model_fixture_checks import check_models
+                result = check_models()
+                print(f"Model checks passed: {len(result['checks'])}; isolated database/role removed")
+            else:
+                if not args.release_id:
+                    raise ValueError("Model build requires an explicit accepted release UUID")
+                from ingestion.modeling import build_weather_models
+                with connect() as connection:
+                    result = build_weather_models(connection, root, args.release_id)
+                print(f"Model build {result['run_id']}: {result['counts']['models']} models; {result['counts']['tests']} tests; candidate schema only")
+            return 0
+        if args.command == "helen":
+            from ingestion.helen import intake_settings, load_source
+            settings = intake_settings(root, load_configuration(root, "HELEN", args.configuration, args.raw_directory), args.intake_contract)
+            with connect() as connection:
+                result = load_source(connection, root, settings, args.manifest)
+            output = project_path(root, "experiments/source-audit/helen-runs")
+            output.mkdir(parents=True, exist_ok=True)
+            (output / (result["run_id"] + ".json")).write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+            print(f"Run {result['run_id']}: {result['counts']['inserted_rows']} source rows inserted; "
+                  f"{result['counts']['replayed_rows']} replayed; {result['counts']['quarantined_rows']} quarantined; no analytical publication")
+            return 0
         if args.command == "schedule":
             from ingestion.scheduling import run_schedule
             result = run_schedule(root, args.plan, runs=args.runs, interval_seconds=args.interval_seconds,
@@ -68,6 +104,11 @@ def main(argv=None) -> int:
                 output.parent.mkdir(parents=True, exist_ok=True)
                 output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
                 print(f"Foundation checks passed: {len(result['checks'])}; isolated database removed")
+            elif args.action == "model-role":
+                from ingestion.permissions import provision_model_role
+                with connect() as connection:
+                    result = provision_model_role(connection,args.model_role)
+                print(f"Provisioned {result['model_role']}; DDL limited to dbt_weather; no login credentials created")
             elif args.action == "roles":
                 from ingestion.permissions import provision_roles
                 with connect() as connection:

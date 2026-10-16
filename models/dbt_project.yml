@@ -1,0 +1,20 @@
+name: finnish_energy
+version: '0.1.0'
+config-version: 2
+profile: finnish_energy
+model-paths: [sql]
+test-paths: [tests]
+macro-paths: [macros]
+clean-targets: []
+flags:
+  send_anonymous_usage_stats: false
+  use_colors: false
+  partial_parse: false
+models:
+  finnish_energy:
+    +materialized: view
+    +persist_docs:
+      relation: true
+      columns: true
+    intermediate:
+      +materialized: table

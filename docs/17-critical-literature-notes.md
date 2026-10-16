@@ -78,3 +78,7 @@ The **case-specific evidence gap** is the still-unverified chain from these part
 2. Prioritise remaining method/evaluation reading of the 15 selected references, including L11/L14/L16, and inspect unverified assumptions/remaining sections in these notes. L12/L13 are reserved reading candidates; obtain them lawfully if their methods/background are needed.
 3. Use [the 45-hit search-screening record](literature/search-screening.csv) to follow up six queued titles and verify three possible version relationships. DOI registration and a `journal-article` metadata type do not certify peer review.
 4. Select the final justified source set and complete the critical comparison before marking WP1.2 done. Preserve excluded/version records; do not add every discovered candidate to the final bibliography.
+
+## Author review update, 16 October 2026
+
+The author reports reviewing the selected literature. Record the initial 15-core-reference author-review step as completed, while preserving the actual passage/access levels of the assisted notes and five reserve candidates. No new per-paper reading depth, hours or agent full-text access is inferred. Final thesis synthesis, citation accuracy and supervisor/report revisions continue; this confirmation does not complete later academic submission tasks.

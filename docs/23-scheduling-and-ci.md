@@ -89,3 +89,7 @@ Private evidence: `experiments/source-audit/scheduling-verification.json`, `sche
 ## Subsequent WP3.1 status
 
 On 16 October 2026, [accepted-weather reporting views and loader/reporter groups](24-database-permissions.md) were verified. The current suite is 76 offline tests and 39 database checks on Windows/Linux. The loader-role replay keeps the original release/checkpoint; the working ledger has 13 successful runs and two retained failed startup attempts from the corrected session-visibility issue. Earlier counts above describe their dated delivery. Latest local evidence backup: 415 files/three sample restores, still on C:. Hosted CI, persistent application/BI logins and full Gold/E4 remain pending.
+
+## Subsequent Helen and hosted CI delivery
+
+[Helen source intake](25-helen-source-intake.md), delivered 16 October 2026, adds migration 006 and explicit loader-only SELECT/INSERT on two intake tables. The current suite is 83 offline tests/44 DB checks on Windows/Linux. Actual intake/replay retains 91,767 source records without changing weather publication. Hosted CI green/red/green is verified for 9fb12dd (76/39 baseline); local Helen changes await their own publication. The author confirms selected-literature review and consumption interpretation, and chooses local-only backup with shared-drive risk acceptance. Earlier counts above describe their dated delivery.

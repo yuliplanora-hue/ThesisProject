@@ -1,0 +1,15 @@
+finnish_energy:
+  target: local
+  outputs:
+    local:
+      type: postgres
+      host: "{{ env_var('ENERGY_DB_HOST', '127.0.0.1') }}"
+      port: "{{ env_var('ENERGY_DB_PORT', '5432') | int }}"
+      dbname: "{{ env_var('ENERGY_DB_NAME', 'finnish_energy') }}"
+      user: "{{ env_var('ENERGY_DB_USER', 'energy') }}"
+      password: "{{ env_var('DBT_ENV_SECRET_PASSWORD') }}"
+      role: "{{ env_var('ENERGY_MODEL_ROLE', 'energy_transformer') }}"
+      schema: dbt_weather
+      threads: 2
+      connect_timeout: 5
+      retries: 0

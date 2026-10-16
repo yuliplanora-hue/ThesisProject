@@ -80,3 +80,7 @@ Restricted roles can have hidden `pg_stat_activity.backend_start` values, even f
 Private evidence: `experiments/source-audit/permissions-verification.json`, `database-permissions.json`, `database-foundation.json`, `role-switch-failures.json` and the loader replay report. The prior successful WP2.5 code and initial failing WP3.1 code are retained under private code snapshots. Temporary test roles remaining: zero. Hosted CI evidence, persistent application/BI login provisioning, independent backup and PostgreSQL restore remain separate completion conditions.
 
 Next implementation: WP3.2's weather-first SQL/dbt slice, then UTC/hour/reporting models under WP3.3. Extend migrations, reporting/grants and source acceptance together when adding Helen and the complete Gold model. See [the development plan](07-development-plan.md) and [execution tracker](12-execution-tracker.md).
+
+## Subsequent Helen and hosted CI delivery
+
+[Helen source intake](25-helen-source-intake.md), delivered 16 October 2026, adds migration 006 and explicit loader-only SELECT/INSERT on two intake tables. The current suite is 83 offline tests/44 DB checks on Windows/Linux. Actual intake/replay retains 91,767 source records without changing weather publication. Hosted CI green/red/green is verified for 9fb12dd (76/39 baseline); local Helen changes await their own publication. The author confirms selected-literature review and consumption interpretation, and chooses local-only backup with shared-drive risk acceptance. Earlier counts above describe their dated delivery.
