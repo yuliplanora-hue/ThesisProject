@@ -18,6 +18,8 @@ from ingestion.provenance import code_identity, project_path
 
 
 def model_identity(root, release_id):
+    # Use the same canonical root as project_path, including Windows 8.3 aliases.
+    root=Path(root).resolve()
     release_id=str(UUID(str(release_id)))
     directory=project_path(root,"models")
     files=sorted(p for p in directory.rglob('*') if p.suffix in ('.sql','.yml') and p.is_file()

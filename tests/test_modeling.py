@@ -1,6 +1,7 @@
 """UUID boundaries, deterministic model identity and bounded secret-safe dbt invocation."""
 
 import json
+from contextlib import chdir
 import subprocess
 import tempfile
 import unittest
@@ -12,6 +13,16 @@ from ingestion.modeling import execute_dbt, model_identity
 
 
 class ModelingTests(unittest.TestCase):
+    def test_relative_and_canonical_roots_produce_the_same_identity(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);(root/'models').mkdir()
+            (root/'models/dbt_project.yml').write_text('name: fixture\n',encoding='utf-8')
+            release=uuid4()
+            with patch('ingestion.modeling.importlib.metadata.version',return_value='fixture'):
+                expected=model_identity(root.resolve(),release)
+                with chdir(root):
+                    self.assertEqual(model_identity(Path('.'),release),expected)
+
     def test_release_uuid_rejected_before_process_or_database_work(self):
         with patch('ingestion.modeling.subprocess.run') as run:
             with self.assertRaises(ValueError):
