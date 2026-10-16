@@ -1,0 +1,13 @@
+{
+  "fixture_version": "0.1",
+  "heat_rows": 240,
+  "weather_rows": 240,
+  "case_count": 11,
+  "metric_comparisons": 55,
+  "manual_answer_basis": "Literal hand calculations documented in docs/19-reference-fixtures.md; not generated from the checker",
+  "files": {
+    "heat.csv": "744c8424581bba792a5aff05e0ef7a418f3e2b15d9241090e9c1a100a2849ed9",
+    "weather_hourly.csv": "37c1d0f5976abc85ff3d3a377ab519f3541dbbd806424c671cd2a7e2eb747c2b",
+    "cases.json": "20253085413694f8e2e122017faba827fa11b38d3b3e39a4fe231567e75e5dc3"
+  }
+}

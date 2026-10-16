@@ -1,0 +1,18 @@
+{
+  "version": "0.1",
+  "accepted_scope": "FMI source-resolution temperature ingestion only",
+  "source_id": "FMI_WEATHER",
+  "allowed_station_ids": ["100971", "100968"],
+  "default_station_id": "100971",
+  "parameter": "t2m",
+  "unit": "degC",
+  "timestamp_basis": "UTC observation instant",
+  "source_aggregation_period": "PT1M",
+  "request_timestep_minutes": 10,
+  "maximum_batch_manifests": 110,
+  "nan_rule": "retain original text; NULL temperature with source_nan quality",
+  "absent_rule": "record expected minus returned keys; do not fabricate source rows",
+  "revision_rule": "retain each content snapshot; no active-revision selection",
+  "parser_version": "fmi-point-0.1",
+  "paired_heating_acceptance": false
+}

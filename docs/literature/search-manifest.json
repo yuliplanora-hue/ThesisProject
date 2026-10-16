@@ -1,0 +1,44 @@
+{
+  "search_date": "2026-10-14",
+  "query_specification_sha256": "3938d0137b44eac6e2bb13f534a3e08324fbe52df9eab8b0e53da9a5b18e0a67",
+  "provider": "Crossref REST API",
+  "returned_hits": 45,
+  "unique_dois": 45,
+  "screening_counts": {
+    "not_prioritised": 35,
+    "selected_for_matrix": 1,
+    "duplicate_title_check": 3,
+    "queue_for_primary_reading": 6
+  },
+  "queries": [
+    {
+      "id": "S10",
+      "url": "https://api.crossref.org/works?query=district+heating+open+data+quality+temperature&filter=type%3Ajournal-article%2Cfrom-pub-date%3A2020-01-01%2Cuntil-pub-date%3A2026-10-14&sort=score&order=desc&rows=15",
+      "retrieved_at_utc": "2026-10-14T13:08:07.992489+00:00",
+      "sha256": "173186cdaf038f9da770d4e51e242df789a0529498eb3c4940d27d60f9421eb1",
+      "returned": 15,
+      "api_total_results_at_retrieval": 2092280,
+      "raw_file": "experiments/source-audit/literature-search/S10-173186cdaf038f9da770d4e51e242df789a0529498eb3c4940d27d60f9421eb1.json"
+    },
+    {
+      "id": "S11",
+      "url": "https://api.crossref.org/works?query=reproducible+data+pipelines+analytical+data+quality&filter=type%3Ajournal-article%2Cfrom-pub-date%3A2020-01-01%2Cuntil-pub-date%3A2026-10-14&sort=score&order=desc&rows=15",
+      "retrieved_at_utc": "2026-10-14T13:08:09.625074+00:00",
+      "sha256": "4bb26846621e879959fcf2d4157d8c0865bc251fc198397b5725a4a00f126c8f",
+      "returned": 15,
+      "api_total_results_at_retrieval": 1396095,
+      "raw_file": "experiments/source-audit/literature-search/S11-4bb26846621e879959fcf2d4157d8c0865bc251fc198397b5725a4a00f126c8f.json"
+    },
+    {
+      "id": "S12",
+      "url": "https://api.crossref.org/works?query=temporal+cross+validation+forecasting+evaluation&filter=type%3Ajournal-article%2Cfrom-pub-date%3A2020-01-01%2Cuntil-pub-date%3A2026-10-14&sort=score&order=desc&rows=15",
+      "retrieved_at_utc": "2026-10-14T13:08:11.338184+00:00",
+      "sha256": "74a23e4298d4e49682eeacec5d3410fffaf89e2676af75b6f4954f8b5076efce",
+      "returned": 15,
+      "api_total_results_at_retrieval": 1323204,
+      "raw_file": "experiments/source-audit/literature-search/S12-74a23e4298d4e49682eeacec5d3410fffaf89e2676af75b6f4954f8b5076efce.json"
+    }
+  ],
+  "scope": "Three bounded relevance-ranked metadata searches; not exhaustive or a library/Scopus search",
+  "review_limit": "DOI registration and journal-article metadata do not establish peer review; possible same-title versions are flagged without inventing a relationship."
+}

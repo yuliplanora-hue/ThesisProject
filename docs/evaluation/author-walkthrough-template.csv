@@ -1,0 +1,1 @@
+attempt_id,attempt_kind,task_id,executed_at_utc,release_id,code_version,protocol_version,correctness,elapsed_seconds,assistance,answer_evidence,issue_id,retest_of,interpretation_limit

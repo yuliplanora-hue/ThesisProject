@@ -1,6 +1,6 @@
 # Local platform architecture and Fabric demonstration
 
-**Status:** proposed platform design, with source-audit helpers and operational database foundation implemented on 14 October 2026. The generic profiler, Compose setup, Helen/FMI feasibility tools, database client and first operational migration exist. Source-to-ledger integration, analytical ingestion and models remain planned. See [the source audit](11-source-audit.md), [the data dictionary](05-data-dictionary.md) for grains and [the task backlog](07-development-plan.md) for implementation ownership.
+**Status:** proposed platform design, with source-audit helpers and WP2.1 operational foundation implemented on 14 October 2026. The generic profiler, Compose setup, Helen/FMI feasibility tools, database client, five migrations, module CLI, acquisition ledger, typed FMI Silver ingestion and weather-only accepted-release/checkpoint framework exist. [Weather publication](22-weather-publication.md) implements explicit source layers, replay and atomic visibility/recovery. [Reporting views and non-login loader/reporter groups](24-database-permissions.md) are now implemented and verified on the accepted weather slice, including restricted-session recovery visibility. Helen ingestion and hourly/combined Gold models remain planned. [Weather ingestion](21-weather-ingestion.md) records source-only acceptance, lineage, revision/replay and failure boundaries. See [operational provenance](20-operational-provenance.md), [the source audit](11-source-audit.md), [the data dictionary](05-data-dictionary.md) for grains and [the task backlog](07-development-plan.md) for implementation ownership.
 
 ## Logical flow
 
@@ -32,7 +32,7 @@ Layers describe responsibilities. Local Bronze is immutable files/responses plus
 | --- | --- | --- |
 | `ingestion/` | Source adapters, manifests, bounded requests, parser contracts and CLI | WP2.1–WP2.3 |
 | `config/` | Versioned non-secret settings; environment-specific values kept separate | WP2.1 |
-| `sql/migrations/` | Operational tables, constraints, roles and database migrations | WP3.1 |
+| `sql/migrations/`, `ingestion/permissions.py` | Schema/constraints/reporting views and explicit admin role provisioning; cluster roles are separate from migration replay | WP3.1 |
 | `models/` | One dbt project with staging/intermediate/Gold models and tests | WP3.2–WP3.3 |
 | `analytics/` | Reproducible notebooks/functions, statistical configuration and memo inputs | WP4.3–WP4.4 |
 | `powerbi/` | Report/model artefacts, readable DAX/Power Query, metric comparisons and refresh instructions | WP4.1–WP4.2 |
@@ -42,7 +42,7 @@ Layers describe responsibilities. Local Bronze is immutable files/responses plus
 | `experiments/` | Versioned experiment definitions and selected publication-safe evidence | WP6 |
 | `docs/` | Contracts, decisions, model/metric definitions, runbook and handover | All packages |
 
-Create these paths as their tasks begin. A single application package/entry point should orchestrate acquisition, validation, modelling and publication; its exact command is added to the setup guide only after implemented and tested.
+Create these paths as their tasks begin. The implemented entry point is `python -m ingestion`, supporting database foundation, retained-manifest registration and FMI `weather acquire/load` and weather `release publish/resume/status`. Future Helen loading and hourly/combined Gold commands extend this entry point when their tasks are implemented and tested. [The provenance runbook](20-operational-provenance.md) records its current boundary.
 
 ## Snapshot and revision lifecycle
 
@@ -58,7 +58,7 @@ For an unchanged source revision/configuration, a replay may write a new executi
 
 ## Atomic publication and report consistency
 
-Proposed local pattern: build candidate tables/rows under a new `release_id`; validate all required models; atomically update the accepted-release reference in one PostgreSQL transaction. Failed candidates never become visible through reporting views. Retain the prior accepted release for comparison/recovery.
+Implemented weather-only pattern: build and validate source-point candidates under a new `release_id`, then atomically commit candidate rows, accepted pointer, checkpoint and successful run. Conflicts/faults preserve prior reporting state; interrupted processes resume only against the unchanged checkpoint. Hourly/combined Gold integration must apply the same boundary to the complete tested model graph. Prior releases remain available by pinned ID; see [the weather implementation](22-weather-publication.md).
 
 dbt model materialisation alone is not assumed to make the entire model graph atomic. The runner owns candidate validation and publication. Test interruption before publication and ensure checkpoints do not advance incorrectly.
 
@@ -72,9 +72,11 @@ Use separate loader and reporting accounts; the current setup superuser is not t
 
 Back up the database and required raw manifests; restore into a separate test database. Verify keys, values and audit records against the backup snapshot. Document the recovery command sequence and expected status before testing any restore into a working environment.
 
-CI should start an isolated test database, apply migrations, load synthetic fixtures, run Python/data/model checks and fail on bad expected outcomes. Live FMI access is a separate integration check; third-party availability must not make ordinary unit tests unreliable.
+The current [CI workflow](../.github/workflows/ci.yml) runs offline Python fixtures on Windows/Linux and checks migration replay, checksum guards and synthetic operational records in an isolated PostgreSQL database. Weather accepted-release/recovery and bounded scheduler checks are included now; future hourly/Gold/dbt models will add their own checks. [The local runner](23-scheduling-and-ci.md) uses finite child executions, a stream lease, exact plan/parent guards and fail-stop reporting. An opt-in synthetic failure job demonstrates a nonzero check locally; hosted execution remains pending. Live FMI access is a separate integration check; third-party availability must not make ordinary unit tests unreliable. CD remains deferred until an executable application and deployment environment have release, health-check and rollback contracts.
 
 ## Conditional Fabric slice
+
+The author confirmed Fabric access on 14 October 2026. Workspace/capacity, roles/sharing, expiry and deployment authentication remain to verify under D-011/WP5.1; there is no deployed cloud slice yet.
 
 | Local responsibility | Bounded Fabric equivalent | Required evidence |
 | --- | --- | --- |

@@ -1,0 +1,3 @@
+# Keep reference-fixture byte hashes stable on Windows and Linux.
+tests/fixtures/wp1/* text eol=lf
+sql/migrations/*.sql text eol=lf

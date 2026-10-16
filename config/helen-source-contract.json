@@ -1,0 +1,92 @@
+{
+  "contract_version": "0.3",
+  "declared_on": "2026-10-14",
+  "status": "publisher snapshot/UTC verified; author-confirmed interval-end label mapping; quantity/boundary/current-edition licence acceptance pending",
+  "source_id": "HELEN_DISTRICT_HEATING",
+  "publisher_page": "https://www.helen.fi/en/about-us/helen/open-data",
+  "local_snapshot": "data/raw/helen_open_dh_data_2015p01_2026p03b_v2.csv",
+  "snapshot_sha256": "f8363dbbfa09c8a00048de4836c4029a6f4d3482ee5e4b2f99da2b1e938cfee1",
+  "lexical_contract": {
+    "encoding": "UTF-8; optional BOM",
+    "delimiter": ";",
+    "columns": [
+      "datetime_utc",
+      "dh_MWh"
+    ],
+    "timestamp_format": "%d.%m.%Y %H:%M",
+    "measurement_parser": "explicit decimal-comma Decimal; retain original source string",
+    "business_key_candidate": "heating-system series plus UTC interval end; canonical interval start is end minus one elapsed hour",
+    "distinct_written_clock_hours": 91767,
+    "gap_duplicate_off_hour_findings": "none within the audited written-clock sequence"
+  },
+  "semantic_contract": {
+    "quantity_kind": null,
+    "physical_unit": "MWh",
+    "series_label": "district heating",
+    "unit_evidence": "Author stated 'unit is mhw, dh means district heating' on 2026-10-14; spelling recorded as MWh to match dh_MWh. No publisher clarification supplied.",
+    "timestamp_timezone": "UTC",
+    "interval_convention": "interval_end",
+    "system_boundary": null,
+    "catalogue_hint": "publisher describes power/production need in MW; reconcile this with author-provided MWh and establish interval meaning before conversion",
+    "accepted_energy_conversion": false,
+    "accepted_utc_mapping": true,
+    "utc_mapping_evidence": "Publisher-linked CSV header datetime_utc; publisher chart parseDate constructs Date.UTC from day/month/year/hour/minute. Source-declared UTC labels, not an independent sensor-clock accuracy test.",
+    "interval_duration_hours": 1,
+    "accepted_interval_label_mapping": true,
+    "interval_mapping_evidence": {
+      "basis": "author clarification, not publisher confirmation",
+      "recorded_on": "2026-10-14",
+      "author_statement": "interval start 10:00 , covers 09:00–10:00",
+      "normalisation": "The explicit covered hour makes 10:00 the interval-end label; preserve the source label and subtract one elapsed UTC hour for canonical start.",
+      "mapping": "interval_end_utc = parsed source UTC label; interval_start_utc = interval_end_utc - 1 hour"
+    }
+  },
+  "licence_and_acquisition": {
+    "catalogue_licence": "CC BY 4.0",
+    "catalogue_url": "https://www.opendata.fi/data/fi/dataset/helsingin-kaukolammon-tuotantotarve",
+    "current_snapshot_licence_confirmed": false,
+    "original_retrieved_at_utc": null,
+    "original_download_url": null,
+    "raw_redistribution_accepted": false,
+    "verified_current_download_url": "https://www.helen.fi/contentassets/7a09af6d184447d6982a6f80e3bd3e29/helen_open_dh_data_2015p01_2026p03b_v2.csv",
+    "verified_retrieved_at_utc": "2026-10-14T14:21:23.334490+00:00",
+    "verified_publisher_snapshot_match": true,
+    "publisher_page_sha256": "1054dbe8d4e9e21b12d9d605b9998d820ae0ee1ef0898a56ab30d0808fd1c213",
+    "catalogue_linked_edition_sha256": "c98df0c7fe3ad7e6d24a269bdce85442b11cbf76461f859b20f074f266314851",
+    "licence_limit": "Live HRI CC BY 4.0 metadata links the distinct 2015-2024 edition; licence applicability to the publisher current edition remains unconfirmed."
+  },
+  "revision_policy": {
+    "baseline": "preserve the named snapshot; any final evaluation snapshot choice must be declared explicitly",
+    "unknown_conflict": "retain conflicting revisions and stop analytical publication until precedence is justified",
+    "omission": "do not infer deletion until full-snapshot/partition/delta scope is known",
+    "download_order_is_publisher_precedence": false
+  },
+  "paired_period": {
+    "status": "interval-end label mapping author-confirmed; quantity/boundary/licence and final paired acceptance pending",
+    "reporting_timezone": "Europe/Helsinki",
+    "local_start": "2024-01-01T00:00:00+02:00",
+    "local_end_exclusive": "2026-01-01T00:00:00+02:00",
+    "candidate_start_utc": "2023-12-31T22:00:00Z",
+    "candidate_end_utc_exclusive": "2025-12-31T22:00:00Z",
+    "accepted": false
+  },
+  "allowed_now": [
+    "immutable raw storage",
+    "lexical parsing",
+    "unconverted profiling",
+    "synthetic analytical fixtures",
+    "publisher-declared UTC observation-label accounting"
+  ],
+  "blocked_until_evidence": [
+    "interpreted energy/power facts",
+    "accepted paired heat/weather analysis",
+    "live heating metrics",
+    "raw redistribution"
+  ],
+  "evidence_to_close": [
+    "quantity/interval meaning and reconciliation of publisher MW wording with author-provided MWh",
+    "precise system boundary",
+    "current-edition licence applicability",
+    "final paired physical acceptance and final revision/omission policy"
+  ]
+}

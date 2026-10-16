@@ -1,6 +1,6 @@
 # Research and evaluation protocol
 
-**Version:** 0.3, 14 October 2026. Implements Sections 6–7 of the [research plan](Li_Yu_Thesis_Research_Plan.docx). E1–E7 are planned experiments; none is reported as passed. Freeze the final protocol and input hashes at G5 before collecting final results. Preparatory source checks are recorded separately in [the source audit](11-source-audit.md).
+**Version:** 0.5, 14 October 2026. Implements Sections 6–7 of the [research plan](Li_Yu_Thesis_Research_Plan.docx). E1–E7 are planned experiments; none is reported as passed. The initial [reference/fallback/split baseline](19-reference-fixtures.md) and [26-case execution catalogue](evaluation/case-catalogue.csv) are delivered; freeze final accepted protocol/input versions at G5 before collecting final results. Preparatory source checks are recorded separately in [the source audit](11-source-audit.md).
 
 ## Research questions and method
 
@@ -9,7 +9,11 @@
 
 Follow Design Science Research: define the problem and objectives, design/build the artefact, demonstrate it, evaluate against requirements and communicate findings. Use formative checks during development and retain a separate final evaluation dataset/result set. Implementation completion is not itself an answer to the research questions.
 
+The WP1 [scope/method record](13-scope-and-method.md) defines personas, initial task/rubric wording and evaluation units; [the literature review](14-literature-review.md) records the scholarly rationale. Use [the data-management plan](15-data-management-plan.md) for reviewer/storage/retention preparation and [source contracts](16-source-contracts.md) for the full weather feasibility evidence. These drafts and source checks do not pass the final experiments or freeze all G5 definitions.
+
 ## Evaluation setup
+
+Current synthetic controls include 55 hand-entered M1–M5 answers over 11 scenarios, verified by direct Python arithmetic in `tools/check_wp1_fixtures.py`. They supply the required six-filter matrix plus targeted quality/DST/blank cases. This verifies reference controls only; no SQL/DAX reconciliation or E5 result is implied. Use versioned actual-output records separately during WP4/WP6.
 
 Before final execution, record:
 
@@ -78,6 +82,8 @@ For percentages, compare percentage points after converting both values to the s
 
 ### E6 Analytical tasks and reviewer feedback
 
+The author confirmed the author-only walkthrough fallback on 14 October 2026. Its initial/retest procedure and empty recording template are in [the reference baseline](19-reference-fixtures.md). All five final answers must be correct and traceable; initial failures remain recorded. This fallback does not establish independent-user usability. Independent reviewer availability remains unknown; apply the independent-study procedure below only if participation is arranged.
+
 **Maps to:** RQ2; FR-14; NFR-05.
 
 Invite 2–3 reviewers, aiming for analytical/domain and technical perspectives. Use the same five [AT-01–AT-05 tasks](01-requirements.md), wording, dataset and reference rubric. Record answer correctness, time, assistance and clarity comments. If comparing with a baseline, counterbalance order where feasible and discuss learning effects.
@@ -94,7 +100,9 @@ Before WP4.3 exploratory modelling or feature selection, record chronological de
 
 - Regenerate notebook/model outputs, charts and the memo from the frozen Gold data and configuration.
 - Check chronological holdout boundaries, calendar-only baseline, seasonal/calendar adjustment, residual autocorrelation and the chosen uncertainty method.
+- [analysis-split-plan.json](../config/analysis-split-plan.json) predeclares 2024 development/2025 holdout before heat modelling, conditional on accepted paired alignment. Any replacement split must be declared before heat-model outcome exploration, with seasonal/exposure limits recorded.
 - Run the declared weather-fill/station sensitivity check. Confirm that each of three memo findings has a reproducible query/chart and a limitation.
+- D-022 preselects station 100968 in [the sensitivity plan](../config/station-sensitivity-plan.json). Audit its accepted-period coverage, apply identical aggregation/no-fill rules and compare on common eligible heat/weather days; report station-specific exclusions. Hold specification/split/uncertainty rules fixed and fit each sensitivity model on development data only. Four seasonal extraction checks are preparatory evidence, not an E7 pass.
 - **Pass:** findings regenerate; sample sizes, missingness, uncertainty and confounding are disclosed; statements follow the evidence. Weak associations and null findings are valid outcomes.
 
 ## Performance sub-study
@@ -110,6 +118,10 @@ Label any larger deterministic synthetic dataset. Small real data cannot establi
 Forecasting is outside E1–E7 and has no allocated core hours. If selected after G4, approve a separate bounded protocol: seasonal-naive versus one simple model, rolling-origin evaluation, MAE/RMSE by window and predictors available at issue time. Future observed temperatures are prohibited in a genuine next-day forecast; a historical-weather scenario must be labelled as such.
 
 ## Evidence records and storage
+
+The [case catalogue](evaluation/case-catalogue.csv) assigns stable IDs, inputs/faults, actions, criteria and evidence to 26 planned cases: eight E1, four E2, four E3, three E4, one E5 matrix, one five-task E6 walkthrough, three E7 and two performance cases. Every entry is `not_run`. An entry can require several executions; E5-01 expands to at least 30 SQL/DAX comparisons and the manual controls, rather than counting one comparison. The initial 55-answer Python fixture check is preparatory evidence only.
+
+Before each final execution, materialise exact fixture IDs/hashes and fault parameters, then retain a separate result record with the fields below. Preserve failures and link retests to the same case ID and changed release/protocol version. Hosted unit tests, existing ledger checks and file-copy restores do not substitute for these final system experiments. The catalogue adds detail within WP1.4's existing allocation and does not change the experiment definitions or pass thresholds.
 
 Evidence locations to populate during development (source-helper tests already exist):
 

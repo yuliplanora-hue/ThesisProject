@@ -1,18 +1,20 @@
 # Data source inventory and feasibility audit
 
-**Version:** 0.3, 14 October 2026. Supports FR-01–FR-03 and WP1.3 in the [development plan](07-development-plan.md). The Helen file has now passed an explicit parsing audit, and nine FMI feasibility checks passed. Helen semantics and the final FMI station/aggregation/common-period contract remain open. See [the detailed source audit](11-source-audit.md).
+**Version:** 0.4, 14 October 2026. Supports FR-01–FR-03 and WP1.3 in the [development plan](07-development-plan.md). Helen lexical parsing is verified; the full 2024–2025 FMI weather window is acquired/audited, with a predeclared weather baseline. Helen semantics/current-snapshot licence and final paired time alignment remain open. See [the detailed source audit](11-source-audit.md) and [source contracts](16-source-contracts.md).
 
 ## Sources and current status
 
 | Source | Evidence available | Intended role | Open checks |
 | --- | --- | --- | --- |
-| [Helen open data](https://www.helen.fi/en/about-us/helen/open-data) | Publisher page checked during plan revision describes hourly district-heating power; a local CSV and profile exist | One aggregated heating-system series | Reconcile `dh_MWh` with the page’s power wording; interval meaning; UTC convention; coverage; licence/attribution |
-| [FMI WFS](https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services) | Nine successful checks for candidate Kaisaniemi 100971, including repeat, seasons and 23/25-hour days | Observed temperature at one justified Helsinki station | Full-period continuity, final station rationale and hourly aggregation/coverage; parameter metadata and CC BY 4.0 licence recorded |
+| [Helen open data](https://www.helen.fi/en/about-us/helen/open-data) | Full lexical audit; current publisher download/hash and UTC labels verified; author supplied MWh/DH | One aggregated district-heating series | Physical quantity/boundary and publisher wording; current-edition licence and paired acceptance |
+| [FMI WFS](https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services) | 105 full-period chunks for Kaisaniemi 100971 audited and typed-loaded/replayed; 105,264 rows with 16 explicit NaNs. Repeated live one-hour extraction verified; airport comparison preselected | Sampled temperature at identified Helsinki-region points; central urban station is the baseline | Validate analytical aggregation and full alternative-period sensitivity later; complete paired Helen time alignment. Unit/time/licence and baseline weather-window coverage recorded |
 | Fingrid or another contextual source | No source selected or tested for this project | Possible stretch extension | Scope decision after G4; separate units, grain, credentials and licence audit |
 
 ## Helen local audit evidence
 
 Source file: `data/raw/helen_open_dh_data_2015p01_2026p03b_v2.csv`.
+
+Author clarification, 14 October 2026: `dh` means district heating and the unit is recorded as MWh, normalising the supplied `mhw` spelling to match the header. [helen-source-contract.json](../config/helen-source-contract.json) keeps that author statement separate from verified publisher download/UTC label evidence and author-confirmed interval-end labels and unresolved physical quantity/boundary/licence fields. UTC observation labels are now accepted from the publisher chart parser; no publisher reply is inferred.
 
 Local report: `experiments/helen_profile.json`, created with `tools/profile_csv.py`. Both are ignored by Git; obtain an authorised copy to reproduce the audit. The file checksum was rechecked during this documentation update.
 
@@ -27,11 +29,11 @@ Local report: `experiments/helen_profile.json`, created with `tools/profile_csv.
 | Fully duplicated rows | Zero | Does not establish unique timestamp/business keys |
 | Example timestamp | `12.10.2015 06:00` | First displayed record, not a verified minimum or timezone |
 | Example value | `1000,0446680068969` | Decimal-comma text; physical meaning remains unverified |
-| Explicit timestamp audit | 91,767 parsable rows; no duplicate timestamps, off-hour records or missing keys in the written-clock sequence | `2015-10-12 06:00` through `2026-03-31 20:00`; timezone and interval meaning remain unverified |
+| Explicit timestamp audit | 91,767 parsable rows; no duplicate timestamps, off-hour records or missing keys in the written-clock sequence | `2015-10-12 06:00` through `2026-03-31 20:00`; publisher-declared UTC labels now evidenced separately; author confirms each label marks the end of the preceding hour; publisher confirmation not supplied |
 
 Verified lexical parsing rules are `%d.%m.%Y %H:%M` and decimal comma. Apply them with explicit failure reporting to each new snapshot. Do not use ambiguous automatic date parsing to establish the contract. Keep the unmodified timestamp and measurement strings.
 
-Those lexical rules have now been exercised over the full local file with `tools/audit_helen.py`; report: `experiments/source-audit/helen-explicit-audit.json`. They establish parsability and written-clock continuity, not physical units or UTC semantics. The original generic report remains unchanged.
+Those lexical rules have now been exercised over the full local file with `tools/audit_helen.py`; report: `experiments/source-audit/helen-explicit-audit.json`. They establish parsability and written-clock continuity. Separate publisher reacquisition/chart evidence now establishes declared UTC labels, while author-confirmed interval-end mapping is recorded separately; physical quantity/boundary remain unresolved. See [the source audit](11-source-audit.md). The original generic report remains unchanged.
 
 The [official open-data catalogue](https://www.opendata.fi/data/fi/dataset/helsingin-kaukolammon-tuotantotarve) describes Helen production need in MW and lists CC BY 4.0. Its recorded resource points to an older filename, so confirm applicability to the current snapshot before redistribution. Record catalogued evidence separately from publisher confirmation of the current file's interval/time semantics.
 
@@ -76,16 +78,16 @@ Verified sample metadata: station name Helsinki Kaisaniemi, coordinates `60.1752
 
 Target 24 consecutive overlapping months after both source audits. A minimum 12-month fallback must include seasons and both DST transitions; document its effect on year-to-year comparisons. Freeze start/end boundaries as a half-open UTC interval and derive Helsinki calendar labels independently.
 
-Do not fill missing demand silently. For weather, start with an unfilled analysis; any interpolation needs a bounded rule, a flag and a sensitivity comparison. Preselect the main station and any backup before final analysis. A scheduled source check is not evidence that the publisher released new observations.
+Do not fill missing demand silently. For weather, start with an unfilled analysis; any interpolation needs a bounded rule, a flag and a sensitivity comparison. Baseline 100971 and sensitivity station 100968 are preselected under D-019/D-022; the alternative does not silently replace or fill the baseline. See [the source contracts](16-source-contracts.md). A scheduled source check is not evidence that the publisher released new observations.
 
 ## Go or no-go evidence
 
 | Decision | Pass evidence | Current status |
 | --- | --- | --- |
-| Helen analytical use | Verified quantity/unit, interval/time convention, parsable keys and documented coverage | Lexical audit passed; semantics pending |
+| Helen analytical use | Verified quantity/unit, interval/time convention, parsable keys and documented coverage | Lexical audit, publisher hash and declared UTC labels verified; interval-end mapping author-confirmed; physical quantity/boundary pending |
 | Helen redistribution | Applicable licence/permission and attribution instructions retained | CC BY 4.0 catalogue evidence found; current-snapshot applicability pending |
-| FMI integration | Repeated query works for the selected station and representative dates; usable common history confirmed | Sample/repeat checks passed; full-period and aggregation acceptance pending |
-| Common period | Frozen boundaries, calendar spine and coverage summary; limitations accepted | 2024–2025 proposed; not frozen or fully acquired |
+| FMI integration | Repeated query works for the selected station and representative dates; usable common history confirmed | Full weather feasibility verified: 105,248/105,264 finite samples and 17,539/17,544 complete hours; baseline/rationale recorded; pipeline integration remains planned |
+| Common period | Frozen boundaries, calendar spine and coverage summary; limitations accepted | Weather 2024–2025 acquired/audited; paired period conditional on Helen semantics |
 
 A source may be usable for private research while redistribution remains unresolved. Publish safe synthetic fixtures and acquisition instructions in that case. If basic semantics or sufficient common history cannot be established, record the issue in D-006/D-007 and seek a revised source/scope decision instead of silently changing the dataset.
 

@@ -1,0 +1,755 @@
+{
+  "fixture_version": "0.1",
+  "schema_role": "Synthetic post-validation analytical inputs, not Helen/FMI acquisition data",
+  "metric_definition_reference": "docs/09-metric-catalog.md version 0.2",
+  "known_physical_semantics": "Interval energy in MWh over exactly one elapsed UTC hour; timestamps mark interval start. Applies only to these manufactured fixtures.",
+  "weather_semantics": "Hourly mean of six identical manufactured finite Celsius samples; no actual station or sensor claim",
+  "reporting_timezone": "Europe/Helsinki",
+  "primary_fixture_window": {
+    "start_utc": "2024-12-31T22:00:00Z",
+    "end_utc_exclusive": "2025-01-03T22:00:00Z"
+  },
+  "numeric_tolerance": "0.000001",
+  "cases": [
+    {
+      "id": "full_period",
+      "filter_kind": "full_period",
+      "scope": {
+        "start_utc": "2024-12-31T22:00:00Z",
+        "end_utc_exclusive": "2025-01-03T22:00:00Z"
+      },
+      "comparison_scope": {
+        "start_utc": "2023-12-31T22:00:00Z",
+        "end_utc_exclusive": "2024-01-03T22:00:00Z"
+      },
+      "expected": {
+        "M1": {
+          "energy_mwh": "528",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M2": {
+          "peak_mw": "12",
+          "tie_count": 24,
+          "earliest_utc": "2025-01-01T22:00:00Z",
+          "earliest_local": "2025-01-02T00:00:00+02:00",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M3": {
+          "change_pct": "10",
+          "blank_reason": null
+        },
+        "M4": {
+          "expected_hours": 72,
+          "accepted_heat_hours": 72,
+          "accepted_weather_hours": 72,
+          "heat_pct": "100",
+          "weather_pct": "100"
+        },
+        "M5": {
+          "selected_calendar_days": 3,
+          "eligible_days": 3,
+          "temperature_unavailable_days": 0,
+          "heat_incomplete_days": 0,
+          "bands": [
+            {
+              "lower_c": -5,
+              "upper_c": 0,
+              "mean_energy_mwh": "240",
+              "eligible_days": 1
+            },
+            {
+              "lower_c": 0,
+              "upper_c": 5,
+              "mean_energy_mwh": "288",
+              "eligible_days": 1
+            },
+            {
+              "lower_c": 5,
+              "upper_c": 10,
+              "mean_energy_mwh": "0",
+              "eligible_days": 1
+            }
+          ],
+          "day_reason_flags": {}
+        }
+      }
+    },
+    {
+      "id": "month",
+      "filter_kind": "month",
+      "scope": {
+        "start_utc": "2024-12-31T22:00:00Z",
+        "end_utc_exclusive": "2025-01-31T22:00:00Z"
+      },
+      "comparison_scope": {
+        "start_utc": "2023-12-31T22:00:00Z",
+        "end_utc_exclusive": "2024-01-31T22:00:00Z"
+      },
+      "expected": {
+        "M1": {
+          "energy_mwh": "528",
+          "state": "observed_subtotal",
+          "blank_reason": null
+        },
+        "M2": {
+          "peak_mw": "12",
+          "tie_count": 24,
+          "earliest_utc": "2025-01-01T22:00:00Z",
+          "earliest_local": "2025-01-02T00:00:00+02:00",
+          "state": "observed_peak",
+          "blank_reason": null
+        },
+        "M3": {
+          "change_pct": null,
+          "blank_reason": "incomplete_period"
+        },
+        "M4": {
+          "expected_hours": 744,
+          "accepted_heat_hours": 72,
+          "accepted_weather_hours": 72,
+          "heat_pct": "9.67741935483871",
+          "weather_pct": "9.67741935483871"
+        },
+        "M5": {
+          "selected_calendar_days": 31,
+          "eligible_days": 3,
+          "temperature_unavailable_days": 28,
+          "heat_incomplete_days": 0,
+          "bands": [
+            {
+              "lower_c": -5,
+              "upper_c": 0,
+              "mean_energy_mwh": "240",
+              "eligible_days": 1
+            },
+            {
+              "lower_c": 0,
+              "upper_c": 5,
+              "mean_energy_mwh": "288",
+              "eligible_days": 1
+            },
+            {
+              "lower_c": 5,
+              "upper_c": 10,
+              "mean_energy_mwh": "0",
+              "eligible_days": 1
+            }
+          ],
+          "day_reason_flags": {
+            "2025-01-04": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-05": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-06": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-07": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-08": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-09": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-10": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-11": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-12": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-13": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-14": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-15": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-16": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-17": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-18": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-19": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-20": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-21": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-22": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-23": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-24": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-25": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-26": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-27": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-28": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-29": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-30": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ],
+            "2025-01-31": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "day",
+      "filter_kind": "day",
+      "scope": {
+        "start_utc": "2025-01-01T22:00:00Z",
+        "end_utc_exclusive": "2025-01-02T22:00:00Z"
+      },
+      "comparison_scope": {
+        "start_utc": "2024-01-01T22:00:00Z",
+        "end_utc_exclusive": "2024-01-02T22:00:00Z"
+      },
+      "expected": {
+        "M1": {
+          "energy_mwh": "288",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M2": {
+          "peak_mw": "12",
+          "tie_count": 24,
+          "earliest_utc": "2025-01-01T22:00:00Z",
+          "earliest_local": "2025-01-02T00:00:00+02:00",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M3": {
+          "change_pct": "20",
+          "blank_reason": null
+        },
+        "M4": {
+          "expected_hours": 24,
+          "accepted_heat_hours": 24,
+          "accepted_weather_hours": 24,
+          "heat_pct": "100",
+          "weather_pct": "100"
+        },
+        "M5": {
+          "selected_calendar_days": 1,
+          "eligible_days": 1,
+          "temperature_unavailable_days": 0,
+          "heat_incomplete_days": 0,
+          "bands": [
+            {
+              "lower_c": 0,
+              "upper_c": 5,
+              "mean_energy_mwh": "288",
+              "eligible_days": 1
+            }
+          ],
+          "day_reason_flags": {}
+        }
+      }
+    },
+    {
+      "id": "empty",
+      "filter_kind": "empty",
+      "scope": {
+        "empty": true
+      },
+      "comparison_scope": null,
+      "expected": {
+        "M1": {
+          "energy_mwh": null,
+          "state": "blank",
+          "blank_reason": "no_expected_keys"
+        },
+        "M2": {
+          "peak_mw": null,
+          "tie_count": 0,
+          "earliest_utc": null,
+          "earliest_local": null,
+          "state": "blank",
+          "blank_reason": "no_expected_keys"
+        },
+        "M3": {
+          "change_pct": null,
+          "blank_reason": "no_expected_keys"
+        },
+        "M4": {
+          "expected_hours": 0,
+          "accepted_heat_hours": 0,
+          "accepted_weather_hours": 0,
+          "heat_pct": null,
+          "weather_pct": null
+        },
+        "M5": {
+          "selected_calendar_days": 0,
+          "eligible_days": 0,
+          "temperature_unavailable_days": 0,
+          "heat_incomplete_days": 0,
+          "bands": [],
+          "day_reason_flags": {}
+        }
+      }
+    },
+    {
+      "id": "missing",
+      "filter_kind": "missing_data",
+      "scope": {
+        "start_utc": "2024-12-31T22:00:00Z",
+        "end_utc_exclusive": "2025-01-03T22:00:00Z"
+      },
+      "comparison_scope": {
+        "start_utc": "2023-12-31T22:00:00Z",
+        "end_utc_exclusive": "2024-01-03T22:00:00Z"
+      },
+      "omit_heat_utc": [
+        "2025-01-01T23:00:00Z"
+      ],
+      "omit_weather_days": [
+        "2025-01-01"
+      ],
+      "expected": {
+        "M1": {
+          "energy_mwh": "516",
+          "state": "observed_subtotal",
+          "blank_reason": null
+        },
+        "M2": {
+          "peak_mw": "12",
+          "tie_count": 23,
+          "earliest_utc": "2025-01-01T22:00:00Z",
+          "earliest_local": "2025-01-02T00:00:00+02:00",
+          "state": "observed_peak",
+          "blank_reason": null
+        },
+        "M3": {
+          "change_pct": null,
+          "blank_reason": "incomplete_period"
+        },
+        "M4": {
+          "expected_hours": 72,
+          "accepted_heat_hours": 71,
+          "accepted_weather_hours": 48,
+          "heat_pct": "98.61111111111111",
+          "weather_pct": "66.66666666666667"
+        },
+        "M5": {
+          "selected_calendar_days": 3,
+          "eligible_days": 1,
+          "temperature_unavailable_days": 1,
+          "heat_incomplete_days": 1,
+          "bands": [
+            {
+              "lower_c": 5,
+              "upper_c": 10,
+              "mean_energy_mwh": "0",
+              "eligible_days": 1
+            }
+          ],
+          "day_reason_flags": {
+            "2025-01-01": [
+              "temperature_unavailable"
+            ],
+            "2025-01-02": [
+              "heat_incomplete"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "fall_dst",
+      "filter_kind": "dst_boundary",
+      "scope": {
+        "start_utc": "2024-10-26T21:00:00Z",
+        "end_utc_exclusive": "2024-10-27T22:00:00Z"
+      },
+      "comparison_scope": {
+        "start_utc": "2025-10-25T21:00:00Z",
+        "end_utc_exclusive": "2025-10-26T22:00:00Z"
+      },
+      "expected": {
+        "M1": {
+          "energy_mwh": "270",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M2": {
+          "peak_mw": "20",
+          "tie_count": 2,
+          "earliest_utc": "2024-10-27T00:00:00Z",
+          "earliest_local": "2024-10-27T03:00:00+03:00",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M3": {
+          "change_pct": "8",
+          "blank_reason": null
+        },
+        "M4": {
+          "expected_hours": 25,
+          "accepted_heat_hours": 25,
+          "accepted_weather_hours": 25,
+          "heat_pct": "100",
+          "weather_pct": "100"
+        },
+        "M5": {
+          "selected_calendar_days": 1,
+          "eligible_days": 1,
+          "temperature_unavailable_days": 0,
+          "heat_incomplete_days": 0,
+          "bands": [
+            {
+              "lower_c": -5,
+              "upper_c": 0,
+              "mean_energy_mwh": "270",
+              "eligible_days": 1
+            }
+          ],
+          "day_reason_flags": {}
+        }
+      }
+    },
+    {
+      "id": "spring_dst",
+      "filter_kind": "targeted",
+      "scope": {
+        "start_utc": "2024-03-30T22:00:00Z",
+        "end_utc_exclusive": "2024-03-31T21:00:00Z"
+      },
+      "comparison_scope": {
+        "start_utc": "2025-03-29T22:00:00Z",
+        "end_utc_exclusive": "2025-03-30T21:00:00Z"
+      },
+      "expected": {
+        "M1": {
+          "energy_mwh": "230",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M2": {
+          "peak_mw": "10",
+          "tie_count": 23,
+          "earliest_utc": "2024-03-30T22:00:00Z",
+          "earliest_local": "2024-03-31T00:00:00+02:00",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M3": {
+          "change_pct": "0",
+          "blank_reason": null
+        },
+        "M4": {
+          "expected_hours": 23,
+          "accepted_heat_hours": 23,
+          "accepted_weather_hours": 23,
+          "heat_pct": "100",
+          "weather_pct": "100"
+        },
+        "M5": {
+          "selected_calendar_days": 1,
+          "eligible_days": 1,
+          "temperature_unavailable_days": 0,
+          "heat_incomplete_days": 0,
+          "bands": [
+            {
+              "lower_c": 0,
+              "upper_c": 5,
+              "mean_energy_mwh": "230",
+              "eligible_days": 1
+            }
+          ],
+          "day_reason_flags": {}
+        }
+      }
+    },
+    {
+      "id": "zero_baseline",
+      "filter_kind": "targeted",
+      "scope": {
+        "start_utc": "2025-01-02T22:00:00Z",
+        "end_utc_exclusive": "2025-01-03T22:00:00Z"
+      },
+      "comparison_scope": {
+        "start_utc": "2024-01-02T22:00:00Z",
+        "end_utc_exclusive": "2024-01-03T22:00:00Z"
+      },
+      "expected": {
+        "M1": {
+          "energy_mwh": "0",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M2": {
+          "peak_mw": "0",
+          "tie_count": 24,
+          "earliest_utc": "2025-01-02T22:00:00Z",
+          "earliest_local": "2025-01-03T00:00:00+02:00",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M3": {
+          "change_pct": null,
+          "blank_reason": "zero_baseline"
+        },
+        "M4": {
+          "expected_hours": 24,
+          "accepted_heat_hours": 24,
+          "accepted_weather_hours": 24,
+          "heat_pct": "100",
+          "weather_pct": "100"
+        },
+        "M5": {
+          "selected_calendar_days": 1,
+          "eligible_days": 1,
+          "temperature_unavailable_days": 0,
+          "heat_incomplete_days": 0,
+          "bands": [
+            {
+              "lower_c": 5,
+              "upper_c": 10,
+              "mean_energy_mwh": "0",
+              "eligible_days": 1
+            }
+          ],
+          "day_reason_flags": {}
+        }
+      }
+    },
+    {
+      "id": "both_sources_missing",
+      "filter_kind": "targeted",
+      "scope": {
+        "start_utc": "2024-12-31T22:00:00Z",
+        "end_utc_exclusive": "2025-01-03T22:00:00Z"
+      },
+      "comparison_scope": {
+        "start_utc": "2023-12-31T22:00:00Z",
+        "end_utc_exclusive": "2024-01-03T22:00:00Z"
+      },
+      "omit_heat_utc": [
+        "2024-12-31T22:00:00Z"
+      ],
+      "omit_weather_days": [
+        "2025-01-01"
+      ],
+      "expected": {
+        "M1": {
+          "energy_mwh": "518",
+          "state": "observed_subtotal",
+          "blank_reason": null
+        },
+        "M2": {
+          "peak_mw": "12",
+          "tie_count": 24,
+          "earliest_utc": "2025-01-01T22:00:00Z",
+          "earliest_local": "2025-01-02T00:00:00+02:00",
+          "state": "observed_peak",
+          "blank_reason": null
+        },
+        "M3": {
+          "change_pct": null,
+          "blank_reason": "incomplete_period"
+        },
+        "M4": {
+          "expected_hours": 72,
+          "accepted_heat_hours": 71,
+          "accepted_weather_hours": 48,
+          "heat_pct": "98.61111111111111",
+          "weather_pct": "66.66666666666667"
+        },
+        "M5": {
+          "selected_calendar_days": 3,
+          "eligible_days": 2,
+          "temperature_unavailable_days": 1,
+          "heat_incomplete_days": 0,
+          "bands": [
+            {
+              "lower_c": 0,
+              "upper_c": 5,
+              "mean_energy_mwh": "288",
+              "eligible_days": 1
+            },
+            {
+              "lower_c": 5,
+              "upper_c": 10,
+              "mean_energy_mwh": "0",
+              "eligible_days": 1
+            }
+          ],
+          "day_reason_flags": {
+            "2025-01-01": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "no_observations",
+      "filter_kind": "targeted",
+      "scope": {
+        "start_utc": "2025-01-01T22:00:00Z",
+        "end_utc_exclusive": "2025-01-02T22:00:00Z"
+      },
+      "comparison_scope": {
+        "start_utc": "2024-01-01T22:00:00Z",
+        "end_utc_exclusive": "2024-01-02T22:00:00Z"
+      },
+      "omit_all_heat": true,
+      "omit_all_weather": true,
+      "expected": {
+        "M1": {
+          "energy_mwh": null,
+          "state": "blank",
+          "blank_reason": "no_accepted_heat"
+        },
+        "M2": {
+          "peak_mw": null,
+          "tie_count": 0,
+          "earliest_utc": null,
+          "earliest_local": null,
+          "state": "blank",
+          "blank_reason": "no_accepted_heat"
+        },
+        "M3": {
+          "change_pct": null,
+          "blank_reason": "incomplete_period"
+        },
+        "M4": {
+          "expected_hours": 24,
+          "accepted_heat_hours": 0,
+          "accepted_weather_hours": 0,
+          "heat_pct": "0",
+          "weather_pct": "0"
+        },
+        "M5": {
+          "selected_calendar_days": 1,
+          "eligible_days": 0,
+          "temperature_unavailable_days": 1,
+          "heat_incomplete_days": 0,
+          "bands": [],
+          "day_reason_flags": {
+            "2025-01-02": [
+              "temperature_unavailable",
+              "heat_incomplete"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "unequal_exposure",
+      "filter_kind": "targeted",
+      "scope": {
+        "start_utc": "2024-10-26T21:00:00Z",
+        "end_utc_exclusive": "2024-10-27T22:00:00Z"
+      },
+      "comparison_scope": {
+        "start_utc": "2024-01-01T22:00:00Z",
+        "end_utc_exclusive": "2024-01-02T22:00:00Z"
+      },
+      "expected": {
+        "M1": {
+          "energy_mwh": "270",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M2": {
+          "peak_mw": "20",
+          "tie_count": 2,
+          "earliest_utc": "2024-10-27T00:00:00Z",
+          "earliest_local": "2024-10-27T03:00:00+03:00",
+          "state": "complete",
+          "blank_reason": null
+        },
+        "M3": {
+          "change_pct": null,
+          "blank_reason": "unequal_exposure"
+        },
+        "M4": {
+          "expected_hours": 25,
+          "accepted_heat_hours": 25,
+          "accepted_weather_hours": 25,
+          "heat_pct": "100",
+          "weather_pct": "100"
+        },
+        "M5": {
+          "selected_calendar_days": 1,
+          "eligible_days": 1,
+          "temperature_unavailable_days": 0,
+          "heat_incomplete_days": 0,
+          "bands": [
+            {
+              "lower_c": -5,
+              "upper_c": 0,
+              "mean_energy_mwh": "270",
+              "eligible_days": 1
+            }
+          ],
+          "day_reason_flags": {}
+        }
+      }
+    }
+  ],
+  "result_scope": "Manual expected answers plus Python reference verification only; SQL/DAX/E5 not executed"
+}

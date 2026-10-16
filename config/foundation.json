@@ -1,0 +1,16 @@
+{
+  "version": "0.1",
+  "scope": "Operational provenance only; no analytical loading or source-semantic approval",
+  "sources": {
+    "FMI": {
+      "source_id": "FMI_WEATHER",
+      "raw_directory": "data/raw/fmi-feasibility",
+      "contract": "config/fmi-source-contract.json"
+    },
+    "HELEN": {
+      "source_id": "HELEN_DISTRICT_HEATING",
+      "raw_directory": "data/raw/source-documents",
+      "contract": "config/helen-source-contract.json"
+    }
+  }
+}

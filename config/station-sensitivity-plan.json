@@ -1,0 +1,28 @@
+{
+  "plan_version": "0.1",
+  "declared_on": "2026-10-14",
+  "status": "comparison preselected before heat modelling; full comparison pending",
+  "baseline_station_id": "100971",
+  "baseline_station_name": "Helsinki Kaisaniemi",
+  "alternative_station_id": "100968",
+  "alternative_station_name": "Vantaa Helsinki-Vantaan lentoasema",
+  "identity_reference": "https://www.ilmatieteenlaitos.fi/1991-2020-auringonpaiste-ja-sateilytilastot",
+  "rationale": "Compare the central urban baseline with an explicitly identified airport station in the Helsinki region; do not select the station by its fit to heat outcomes.",
+  "parameter": "t2m",
+  "request_timestep_minutes": 10,
+  "aggregation_reference": "config/fmi-source-contract.json",
+  "feasibility_samples": [
+    {"id": "winter_2024", "start": "2024-01-15T00:00:00Z", "end": "2024-01-16T00:00:00Z"},
+    {"id": "summer_2024", "start": "2024-07-15T00:00:00Z", "end": "2024-07-16T00:00:00Z"},
+    {"id": "winter_2025", "start": "2025-01-15T00:00:00Z", "end": "2025-01-16T00:00:00Z"},
+    {"id": "summer_2025", "start": "2025-07-15T00:00:00Z", "end": "2025-07-16T00:00:00Z"}
+  ],
+  "later_protocol": [
+    "Audit alternative-station coverage for the accepted paired period before analysis.",
+    "Use identical UTC keys, six-finite-sample hourly aggregation and Helsinki daily completeness rules; no fill.",
+    "Compare station temperatures and analytic results on the intersection of eligible heat/weather days; report station-specific exclusions separately.",
+    "Keep model specification, development/holdout boundaries and uncertainty policy fixed across the comparison; train each sensitivity fit on development data only.",
+    "Report changes in coefficients, uncertainty and held-out errors where applicable; neither station is an independent ground-truth network temperature."
+  ],
+  "limits": "Four seasonal UTC-day checks establish bounded extraction feasibility only, not complete two-year history, spatial representativeness or a passed E7."
+}

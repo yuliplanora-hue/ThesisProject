@@ -1,16 +1,18 @@
 # Thesis development plan
 
-This plan turns Li Yu’s [revised research proposal](Li_Yu_Thesis_Research_Plan.docx) into a sequenced backlog for a reliable heating/weather platform and a balanced analyst/engineer portfolio. It assumes strong SQL, Python and Power BI skills and **20 hours per week**. Development status is proposed unless supported by a completed evidence record.
+This plan turns Li Yu’s [revised research proposal](Li_Yu_Thesis_Research_Plan.docx) into a sequenced backlog for a reliable heating/weather platform and a balanced analyst/engineer portfolio. It assumes strong SQL, Python and Power BI skills and the author-confirmed **50–55 hours per week until the end-of-2026 deadline**. Development status is proposed unless supported by a completed evidence record.
 
-**Baseline:** 14 October 2026. **Implementation window:** November 2026–May 2027. **Capacity:** 28 active weeks, 560 hours, including 60 protected contingency hours. The official topic, workload and Wihi dates need supervisor agreement; this is not a replacement for those decisions.
+**Revised planning baseline:** 14 October 2026; status updated 16 October 2026. **Deadline:** end of 2026, author-confirmed; 31 December is the latest planning boundary until exact programme/review dates are recorded. **Capacity:** 50–55 hours/week to preserve the full analyst/engineer/Fabric scope. The 11 weeks from 15 October to 30 December allocate ten weeks at 51 hours and one at 50: **560 hours including 60 protected contingency hours**. Topic/RQs are author-confirmed approved. Academic workload sufficiency and exact review/submission dates remain pending.
+
+This supersedes the earlier 20-hour/week, November–May, 28-week calendar. Actual author hours remain unrecorded; assisted implementation does not establish author learning hours or competency. Keep author review/reproduction within the package budget and reforecast using actual hours.
 
 ## Outcomes and current starting point
 
 Deliver one local reference platform integrating Helen and FMI, an audited historical period, a tested dimensional model, five measures, three report pages, a statistical case study, an Excel audit and a two-page decision memo. Answer RQ1/RQ2 through E1–E7. Demonstrate one bounded Fabric deployment if access permits, then package two career case studies and a 5–7 minute demo.
 
-Already completed preparation: local Python/Pandas environment, PostgreSQL/Docker setup checks, Git initialisation, a generic Helen CSV profile and the revised research plan. These do not mean source semantics, production ingestion, CI, models, reports or final experiments are complete. October preparation is recorded separately from the future 560-hour implementation budget.
+**Current technical delivery:** WP2.1 foundation and WP2.3 weather-point ingestion are complete. WP2.4 weather-only publication/recovery is verified; Helen and hourly/combined Gold integration remain pending their contracts/models. WP2.5 adds bounded local scheduling and an opt-in CI failure demonstration; hosted CI evidence remains pending. WP1/G1 are still open for the source, academic, storage and thesis-review conditions recorded in [the tracker](12-execution-tracker.md).
 
-**Execution started on 14 October 2026 at the author's request:** explicit Helen parsing audit, bounded FMI acquisition/inspection, representative historical samples, operational metadata migration/database client and synthetic tests are implemented. The author confirmed supervisor approval of the revised topic and RQs. See [the source audit](11-source-audit.md) and [execution tracker](12-execution-tracker.md). WP1.3 and WP2.1 are in progress; source acceptance and remaining academic decisions still apply. Record October work against its task when reporting actual workload; do not add a second budget for the same work.
+The author confirmed topic/RQ approval and Fabric access, but workspace/capacity/permissions still need verification. Source-dependent conversions wait for accepted physical semantics and licence conditions. Current evidence and next actions are in [the execution tracker](12-execution-tracker.md); development checks are not final E1–E7 results. Count October work once against its task, with actual author hours to be recorded.
 
 ## Work packages and budget
 
@@ -24,9 +26,9 @@ Already completed preparation: local Python/Pandas environment, PostgreSQL/Docke
 | WP6 Final evaluation | 50 | Frozen E1–E7 results and interpretation | FR-16; G6 |
 | WP7 Report and portfolio | 80 | Report, revisions, handover and two case studies | FR-16; G7 |
 | C Contingency | 60 | Essential corrections, source problems and review delays | Logged use; no default feature allocation |
-| **Total** | **560** | **500 planned work hours plus 60 contingency** | **28 × 20 hours** |
+| **Total** | **560** | **500 planned work hours plus 60 contingency** | **10 × 51 + 1 × 50 hours** |
 
-Estimates include learning needed for the task, implementation, relevant tests and its documentation. WP6 covers final controlled execution and synthesis, not all development testing. WP7 writing occurs throughout; it is not deferred to May. Do not count one hour in two packages.
+Estimates include learning needed for the task, implementation, relevant tests and its documentation. WP6 covers final controlled execution and synthesis, not all development testing. WP7 writing occurs throughout; it is not deferred to the final December week. Do not count one hour in two packages.
 
 ## Dependencies and completion gates
 
@@ -46,54 +48,37 @@ Cloud unavailability is an explicit alternate route into G5: retain local execut
 
 | Gate | Target | Evidence required to pass |
 | --- | --- | --- |
-| G1 | November 2026 | Topic/RQs/workload decisions; source-contract feasibility and unresolved blockers; common-period proposal; cloud route; initial literature/protocol and competency baseline |
-| G2 | December 2026 | Both sources produce repeatable local extracts, source provenance is retained and a same-revision replay is demonstrated on the accepted sample |
-| G3 | January 2027 | Initial tested SQL/dbt model, CI and source-to-measure slice; remaining optimisation/hardening tasks explicitly tracked |
-| G4 | February 2027 | Three report pages, all five measures reconciled on declared cases and draft analytical findings; final statistical sensitivity and polishing may continue within WP4 |
-| G5 | March 2027, W20 boundary | Feature/protocol/input/environment freeze; conditional cloud evidence or fallback decision; final candidate is reproducible |
-| G6 | April 2027 | E1–E7 executed, failed criteria explained, reviewer/fallback evidence retained and results/discussion draft complete |
-| G7 | May 2027 | Supervisor corrections, reproducibility review, final academic/reporting deliverables and portfolio handover; official submission date agreed separately |
+| G1 | 28 October 2026 | Topic/RQs/workload decisions; source-contract feasibility and unresolved blockers; common-period proposal; cloud route; initial literature/protocol and competency baseline |
+| G2 | 4 November 2026 | Both sources produce repeatable local extracts, source provenance is retained and a same-revision replay is demonstrated on the accepted sample |
+| G3 | 18 November 2026 | Initial tested SQL/dbt model, CI and source-to-measure slice; remaining optimisation/hardening tasks explicitly tracked |
+| G4 | 2 December 2026 | Three report pages, all five measures reconciled on declared cases and draft analytical findings; final statistical sensitivity and polishing may continue within WP4 |
+| G5 | 16 December 2026, W09 | Feature/protocol/input/environment freeze; conditional cloud evidence or fallback decision; final candidate is reproducible |
+| G6 | 23 December 2026 | E1–E7 executed, failed criteria explained, reviewer/fallback evidence retained and results/discussion draft complete |
+| G7 | By 31 December 2026 | Supervisor corrections, reproducibility review, final academic/reporting deliverables and portfolio handover; official submission date agreed separately |
 
-Topic approval must precede formal thesis implementation. Foundation work in the early schedule depends on that approval arriving; adjust dates if it does not. Source-dependent conversion/loading tasks also wait for their accepted contracts. A milestone is not passed merely because its target date has arrived.
+Topic/RQ approval is author-confirmed; record its reference and academic workload/milestones when available. Source-dependent conversion/loading tasks also wait for their accepted contracts. A milestone is not passed merely because its target date has arrived.
 
-## Working calendar and weekly capacity
+## Revised working calendar and weekly capacity
 
-The dates below are scheduling assumptions: start Monday 2 November 2026, reserve **21 December 2026–3 January 2027** as two non-working calendar weeks, then finish W28 on 30 May 2027. These breaks can move without changing the 28 active-week capacity. Actual workload and official dates take precedence.
+The author chose increased weekly hours to preserve full scope: **50–55 hours/week**, confirmed on 14 October 2026. The blocks below run Thursday–Wednesday, starting the day after this update. W01–W10 allocate 51 hours each; W11 allocates 50, including protected reserve. Total allocation remains 560 hours. The earlier November–May calendar and two assumed non-working holiday weeks are superseded; this compressed plan does not assume those weeks are available as breaks.
 
-Each allocation sums to 20 hours. WP numbers refer to the budgets above; C is protected reserve. The W20 boundary crosses into April, and W24 crosses into May; complete the relevant gate within its agreed month or record a revised date.
-
-| Week | Dates | Allocation in hours | Main reviewable outcome |
+| Week | Dates in 2026 | Allocation in hours | Main reviewable outcome |
 | --- | --- | --- | --- |
-| W01 | 2–8 Nov 2026 | WP1=16; WP7=4 | Scope/RQs, evidence map, initial literature and supervisor questions |
-| W02 | 9–15 Nov 2026 | WP1=12; WP2=6; WP7=2 | Source audit progress; package/configuration and safe-fixture design |
-| W03 | 16–22 Nov 2026 | WP1=10; WP2=8; WP7=2 | Explicit parser/time/unit contracts and first typed fixture |
-| W04 | 23–29 Nov 2026 | WP1=8; WP2=10; WP7=2 | G1 decisions, sample manifests and run-ledger foundation |
-| W05 | 30 Nov–6 Dec 2026 | WP2=18; WP7=2 | Helen adapter and row/quality accounting |
-| W06 | 7–13 Dec 2026 | WP2=18; WP7=2 | FMI adapter, verified station and query-chunk evidence |
-| W07 | 14–20 Dec 2026 | WP2=18; WP7=2 | Both-source sample, provenance and replay; G2 review |
-| W08 | 4–10 Jan 2027 | WP2=10; WP3=8; WP7=2 | Corrections/backfill, initial migrations and key tests |
-| W09 | 11–17 Jan 2027 | WP2=2; WP3=16; WP7=2 | CI checks and dbt staging/intermediate models |
-| W10 | 18–24 Jan 2027 | WP3=18; WP7=2 | Hour/date dimensions, Gold facts and aligned weather view |
-| W11 | 25–31 Jan 2027 | WP3=18; WP7=2 | Model tests, lineage and source-to-measure demonstrator; G3 |
-| W12 | 1–7 Feb 2027 | WP3=10; WP4=8; WP7=2 | Query optimisation evidence and independent KPI references |
-| W13 | 8–14 Feb 2027 | WP4=18; WP7=2 | Semantic model, DAX/Power Query and metric comparison cases |
-| W14 | 15–21 Feb 2027 | WP4=18; WP7=2 | Three report pages and reproducible exploratory analysis |
-| W15 | 22–28 Feb 2027 | WP4=18; WP7=2 | Reconciled M1–M5, initial model/findings and G4 review |
-| W16 | 1–7 Mar 2027 | WP4=18; WP7=2 | Statistical diagnostics, Excel audit, memo and task pilot |
-| W17 | 8–14 Mar 2027 | WP5=18; WP7=2 | Fabric workspace/pipeline and declared access configuration |
-| W18 | 15–21 Mar 2027 | WP5=18; WP7=2 | Delta/PySpark transformations and sample result comparison |
-| W19 | 22–28 Mar 2027 | WP5=14; WP1=4; WP7=2 | Cloud recovery/export evidence and final source/protocol decisions |
-| W20 | 29 Mar–4 Apr 2027 | WP1=10; WP2=10 | Fault/recovery hardening; feature/input/protocol freeze at G5 |
-| W21 | 5–11 Apr 2027 | WP4=10; WP6=8; WP7=2 | Final analytical sensitivity checks and start frozen experiments |
-| W22 | 12–18 Apr 2027 | WP6=16; WP7=4 | Engineering experiments, performance and metric reconciliation |
-| W23 | 19–25 Apr 2027 | WP6=16; WP7=4 | Reviewer tasks or fallback, reproducibility and result interpretation |
-| W24 | 26 Apr–2 May 2027 | WP6=10; WP7=10 | G6 evidence review and complete results/discussion draft |
-| W25 | 3–9 May 2027 | WP7=10; C=10 | Supervisor corrections and reproducibility handover |
-| W26 | 10–16 May 2027 | WP7=10; C=10 | Final report, two portfolio case studies and demo |
-| W27 | 17–23 May 2027 | C=20 | Protected correction/review capacity and G7 check |
-| W28 | 24–30 May 2027 | C=20 | Remaining corrections and agreed submission/publication process |
+| W01 | 15–21 Oct | WP1=30; WP2=15; WP7=6 | Author reviews delivered WP1/WP2.1 evidence; source/academic questions; weather ingestion and report introduction |
+| W02 | 22–28 Oct | WP1=16; WP2=30; WP7=5 | G1 decision review; accepted source-specific contracts; typed adapters and quality accounting |
+| W03 | 29 Oct–4 Nov | WP2=35; WP3=12; WP7=4 | Source replay/corrections/backfill, migrations and G2 review |
+| W04 | 5–11 Nov | WP2=10; WP3=35; WP7=6 | CI/recovery foundations, SQL/dbt graph, dimensions and reporting views |
+| W05 | 12–18 Nov | WP3=23; WP4=22; WP7=6 | Tested model/lineage/roles, optimisation, initial metric references and G3 |
+| W06 | 19–25 Nov | WP4=43; WP7=8 | Five SQL/DAX measures, three Power BI pages, statistical/Excel/memo work and task pilot |
+| W07 | 26 Nov–2 Dec | WP4=25; WP5=20; WP7=6 | G4 review, analytical diagnostics/sensitivity and Fabric access/vertical slice |
+| W08 | 3–9 Dec | WP5=30; WP1=4; WP7=8; C=9 | Fabric operations/comparison/export; final source decisions and method/report review |
+| W09 | 10–16 Dec | WP1=10; WP2=10; WP6=15; WP7=10; C=6 | G5 freeze, recovery hardening and controlled final engineering experiments |
+| W10 | 17–23 Dec | WP6=35; WP7=10; C=6 | E1–E7 synthesis, author walkthrough/retests, results/discussion and G6 |
+| W11 | 24–30 Dec | WP7=11; C=39 | Supervisor corrections, reproduction/release, two case studies/demo and G7 preparation |
 
-Unused reserve remains available; it is not an obligation to add features. If a problem arises earlier, move reserve forward and update the calendar and completion forecast. The typical 8-hour engineering / 6-hour analytics / 4-hour research / 2-hour review split is a guide; this package-based calendar is the auditable capacity allocation.
+Coordinate supervisor/programme review dates now: end-of-year holidays may move the practical review/submission deadline earlier. Do not assume staff or institutional services are available on 31 December. If required dates or workload cannot fit this envelope, reforecast with the supervisor rather than claiming completion. Fabric access/configuration must be checked by W07; keep the local main-evaluation route.
+
+Contingency totals 60 hours and can move forward when source or review delays occur. Unused reserve does not justify adding features. At least fortnightly, compare remaining task estimates with actual author hours and confirmed capacity. Writing runs throughout, and final experiment failures/retests remain allocated rather than being omitted for the deadline.
 
 ## Detailed task backlog
 
@@ -110,6 +95,8 @@ Tasks below define the completion targets; current status is maintained in [the 
 
 ### WP2 Ingestion and reliability
 
+**WP2 delivery status, 15 October 2026:** foundation and weather ingestion are complete; weather publication/recovery is delivered separately from the pending integrated Helen/Gold graph. The bounded scheduler and recovery procedure are in [the WP2.5 runbook](23-scheduling-and-ci.md). Hosted CI success/failure URLs and future model checks remain completion conditions. The WP2.5 budget stays 15 hours; actual author hours remain unrecorded.
+
 | Task | Hours | Dependencies | Deliverable and completion check |
 | --- | ---: | --- | --- |
 | WP2.1 Foundation and run metadata | 20 | Topic approval, current setup | Create package/configuration, database client, run/snapshot records and safe fixtures; pin compatible dependencies; prove errors do not expose credentials |
@@ -119,6 +106,8 @@ Tasks below define the completion targets; current status is maintained in [the 
 | WP2.5 CI scheduling and recovery | 15 | Foundation plus an executable slice; build checks early, harden by G5 | Add fixture-based CI, bounded scheduled/CLI execution and fault hooks; prove failed CI is visible and interruption leaves the previous release usable |
 
 ### WP3 SQL and data modelling
+
+**WP3.1 weather slice delivered, 16 October 2026:** five migrations rebuild cleanly; explicit non-login loader/reporter groups and accepted-weather reporting views enforce read/write boundaries. 76 offline tests and 39 database controls pass on Windows/Linux. Real loader replay preserves accepted data/checkpoint; two startup failures are retained with their fix. [Permission runbook](24-database-permissions.md) records commands and limits. Full integrated schemas, dedicated persistent logins and final E4 remain open; next is the weather-first WP3.2 dbt graph.
 
 | Task | Hours | Dependencies | Deliverable and completion check |
 | --- | ---: | --- | --- |
@@ -183,11 +172,20 @@ These actions are part of WP1/WP2, not extra hours:
 
 - [x] Author confirmed supervisor approval of the revised topic and RQs on 14 October 2026.
 - [ ] Record approval details, confirm academic workload and replace assumed dates with agreed milestones when available.
-- [ ] Resolve the Helen `dh_MWh` quantity and interval/time convention; then audit explicit parsing and expected hourly keys.
-- [ ] Accept the final FMI station/aggregation contract and verify full common-period coverage before bulk analytical use.
+- [ ] Resolve the Helen `dh_MWh` physical quantity/boundary and current-edition licence; the author confirms interval-end labels (`10:00` covers `[09:00,10:00)`); explicit parsing, publisher-declared UTC labels and both proposed hourly key ranges are already audited.
+- [x] Declare the FMI weather feasibility baseline and audit its full 2024–2025 Helsinki calendar window; retain missingness evidence and strict six-sample coverage rules.
+- [x] Record author-confirmed Helen interval-end labels: `10:00` covers `[09:00,10:00)`; canonical start is one elapsed UTC hour earlier. Selected-period labels audited under contract v0.3.
+- [ ] Accept final paired Helen/FMI time alignment, source revisions and period before analytical loading; select the station-sensitivity comparison before heat modelling.
 - [x] First FMI sample and nine-case representative matrix acquired and inspected; final station/aggregation/full-period acceptance remains open.
 - [ ] Record dataset licences and a common-period decision; complete baseline competency evidence.
-- [ ] Complete WP2.1 packaging and configuration/evidence integration; its database client, operational ledger, migration and initial safe checks are now implemented.
+- [x] Create the scope/method record, initial literature matrix/search log (now 20 DOI-verified candidates and 15 core selections), six design-rationale links and data-management draft; complete critical reading and pending decisions before marking WP1 done.
+- [x] Complete WP2.1 package/module CLI, configuration and acquisition-to-ledger integration; 44 offline tests, nine database checks and full retained-input replay verified.
+- [x] Complete WP2.3 under the accepted weather-only contract: typed source-resolution load/replay, repeated bounded live extraction and timeout/failure checks; 52 offline tests and 16 database checks pass.
+- [x] Deliver the weather-only WP2.4 release/revision/backfill/checkpoint and interruption-recovery path; 61 offline tests and 25 database checks pass. Integrate Helen and the complete Gold graph after their prerequisites.
+- [x] Deliver WP2.5 bounded local scheduling/recovery and opt-in CI failure preparation; 72 Windows/Linux tests, 28 database checks and current workflow lint pass. Two real replay ticks preserve the release/checkpoint.
+- [ ] Record hosted CI green/red/recovery URLs and commit before closing WP2.5; add future model checks when implemented.
+- [x] Deliver WP3.1’s accepted-weather schema/permission slice: five migrations, real restricted-login enforcement, 76 offline tests/39 database controls on Windows/Linux; track full integrated schemas/logins separately.
+- [x] Record end-of-2026 deadline, increased 50–55-hour weekly capacity and full-scope 11-week calendar. Exact academic review/submission details remain pending.
 
 ## Scope and risk control
 

@@ -36,7 +36,16 @@ def connect(database: str | None = None):
     settings = connection_settings()
     if database is not None:
         settings["dbname"] = database
-    return psycopg.connect(**settings, autocommit=True)
+    connection = psycopg.connect(**settings, autocommit=True)
+    try:
+        if os.environ.get("ENERGY_DB_ROLE"):
+            from ingestion.permissions import role_name
+            from psycopg import sql
+            connection.execute(sql.SQL("SET ROLE {}").format(sql.Identifier(role_name(os.environ["ENERGY_DB_ROLE"]))))
+    except BaseException:
+        connection.close()
+        raise
+    return connection
 
 
 def apply_migrations(connection, directory: Path = Path("sql/migrations")) -> list[str]:

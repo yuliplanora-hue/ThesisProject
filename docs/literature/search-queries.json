@@ -1,0 +1,19 @@
+{
+  "search_date": "2026-10-14",
+  "provider": "Crossref REST API",
+  "endpoint": "https://api.crossref.org/works",
+  "purpose": "Bounded recent-literature update, not an exhaustive systematic review",
+  "filter": "type:journal-article,from-pub-date:2020-01-01,until-pub-date:2026-10-14",
+  "sort": "score",
+  "order": "desc",
+  "rows_per_query": 15,
+  "query_semantics": "Crossref relevance-ranked free text; no Boolean or exact-phrase semantics assumed",
+  "queries": [
+    {"id": "S10", "query": "district heating open data quality temperature"},
+    {"id": "S11", "query": "reproducible data pipelines analytical data quality"},
+    {"id": "S12", "query": "temporal cross validation forecasting evaluation"}
+  ],
+  "deduplication": "Case-folded DOI; repeated hits link to their first occurrence and existing literature matrix IDs",
+  "screening": "Record every returned title's scope decision; title screening is not abstract or full-text review",
+  "limits": "Only the first relevance-ranked page per query; metadata coverage and ranking may change; no TAMK library or Scopus session is claimed"
+}

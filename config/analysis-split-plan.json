@@ -1,0 +1,26 @@
+{
+  "plan_version": "0.1",
+  "declared_on": "2026-10-14",
+  "status": "predeclared before heat modelling; accepted paired input and G5 freeze pending",
+  "purpose": "Historical analytical model validation under WP4/E7; not an operational forecasting deployment",
+  "reporting_timezone": "Europe/Helsinki",
+  "development": {
+    "local_calendar_year": 2024,
+    "start_utc": "2023-12-31T22:00:00Z",
+    "end_utc_exclusive": "2024-12-31T22:00:00Z",
+    "expected_calendar_days": 366
+  },
+  "holdout": {
+    "local_calendar_year": 2025,
+    "start_utc": "2024-12-31T22:00:00Z",
+    "end_utc_exclusive": "2025-12-31T22:00:00Z",
+    "expected_calendar_days": 365
+  },
+  "rationale": "A chronological year-to-year split keeps a full seasonal cycle on each side of the proposed two-year window.",
+  "eligibility": "Apply the accepted heat contract and identical no-fill complete-day rules; report exclusions independently for each side.",
+  "development_only": ["model/feature selection", "learned preprocessing", "residual diagnostics used to choose uncertainty procedures", "hyperparameter/block-length selection where applicable"],
+  "holdout_rule": "Do not use holdout heating outcomes for exploration, tuning or selecting the station; score only after the development specification is fixed.",
+  "station_sensitivity": "Use config/station-sensitivity-plan.json with identical boundaries; fit each model on its development data only and compare on declared common eligible days.",
+  "fallback": "If accepted source alignment cannot support these boundaries, record a replacement split and its seasonal limitations before accessing heat-model outcomes; do not silently reuse this plan for a shorter period.",
+  "limits": "Source-quality audits do not establish a fitted model. One year of holdout evidence does not prove causal effects, customer behaviour or future operational performance."
+}

@@ -62,7 +62,7 @@ Core means required for the proposed local thesis artefact. Conditional means de
 | NFR-08 | Measured performance | Five measured repetitions after declared warm-up; median/range and environment recorded; unchanged results after optimisation |
 | NFR-09 | Recovery | A failed load exposes no partial Gold release; a recovered run matches the clean reference |
 | NFR-10 | Metric agreement | Exact key/count equality; numeric tolerance and empty-value behaviour follow the evaluation protocol |
-| NFR-11 | Feasible scope | 500 planned hours plus 60 contingency at 20 hours/week; cloud work capped at 50 hours |
+| NFR-11 | Feasible scope | 500 planned hours plus 60 contingency; author-confirmed 50–55 hours/week and end-of-2026 deadline, allocated over 11 weeks in the revised plan; cloud work capped at 50 hours |
 | NFR-12 | Evidence integrity | Source facts, design assumptions and actual results are distinguishable; failed criteria and limitations remain visible |
 
 ## Traceability and exclusions
@@ -77,7 +77,8 @@ Excluded from the core: hydraulic simulation, DGN/CAD automation, individual-cus
 - [ ] Record the approval reference and confirm programme-specific contribution/assessment details with the supervisor.
 - [ ] Workload, Wihi milestones and any commissioner/permit requirements settled.
 - [ ] Helen units, interval/time semantics and publication permissions recorded.
-- [ ] FMI station, usable common period and query constraints verified.
+- [x] FMI baseline station/parameter/time/query constraints and 2024–2025 weather-window availability verified; missing samples/values accounted for.
+- [ ] Confirm paired Helen/FMI time alignment, final source revision policy and accepted analytical period.
 - [ ] Metric/filter definitions and evaluation thresholds frozen before final tests.
 - [ ] Fabric access and the local fallback recorded; no cloud skill claimed from design alone.
 - [ ] Reviewer arrangements or the scripted fallback selected.

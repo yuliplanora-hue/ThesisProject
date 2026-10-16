@@ -1,6 +1,6 @@
 # Metric catalogue and analytical tasks
 
-**Version:** 0.2, 14 October 2026. M1–M5 follow Section 5 of the [research plan](Li_Yu_Thesis_Research_Plan.docx). The detailed filter, binning and blank-value rules below are proposed development definitions to validate in WP4.1 and freeze before E5. No measure has yet been implemented or reconciled. This revision clarifies M5 excluded-day accounting after the documentation review.
+**Version:** 0.2, 14 October 2026. M1–M5 follow Section 5 of the [research plan](Li_Yu_Thesis_Research_Plan.docx). The filter, binning and blank-value rules below are development definitions to validate in WP4.1 and freeze before E5. [Fifty-five synthetic reference answers](19-reference-fixtures.md) now have hand controls and Python arithmetic verification; production SQL/DAX measures and reconciliation remain unimplemented. The definition version is unchanged because the fixtures operationalise these existing rules.
 
 **Definition owner:** Li Yu, unless a different owner is explicitly agreed. **Review:** supervisor and available analyst/domain reviewer. **Execution:** SQL reference plus independently written Power BI/DAX calculation against the same accepted release.
 
@@ -97,6 +97,8 @@ Use readable units, accessible colours, tooltips, keyboard navigation and clear 
 ## Validation matrix and artefacts
 
 E5 requires each metric over full period, month, day, empty selection, missing-data period and DST boundary: at least 30 comparisons. A legitimate invalid/blank result must match in SQL and DAX. Add ties, zero denominator, band boundaries and a mismatched-release failure as targeted cases.
+
+The current [WP1 fixture cases](../tests/fixtures/wp1/cases.json) cover the six required filters and five targeted scenarios, including both DST transitions, zero baseline, missing both sources, no observations and unequal exposure. Blank reasons, observed subtotals/peaks, source-specific completeness and excluded-day precedence are explicit. Run `tools/check_wp1_fixtures.py` for reference verification; later SQL/DAX actual outputs and release-conflict tests are separate evidence.
 
 Proposed evidence: `powerbi/` for readable measures/model definitions and exports, `analytics/` for statistical code and `experiments/e5/` for comparison records. Include metric version, exact filter parameters, SQL, DAX, release ID, values, blank reason and tolerance. See [the evaluation protocol](03-evaluation-protocol.md) for exact agreement rules.
 
